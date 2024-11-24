@@ -155,6 +155,7 @@ session_start();
             <?php if (isset($_SESSION['usuario_email'])) { ?>
                 <!-- Exibe as opções quando o usuário está logado -->
                 <a href="../perfil/perfil.php">Perfil</a>
+                <a href="../header/cadastro_admin.php">Cadastro do Administrador</a>
                 <a href="../projeto/meus_projetos.php">Meus Projetos</a>
                 <a href="../projeto/postar_projeto.php">Postar Projeto</a>
                 <a href="../header/logout.php">Logout</a>

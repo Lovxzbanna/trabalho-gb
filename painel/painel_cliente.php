@@ -253,10 +253,10 @@ if (isset($_COOKIE['usuario_email'])) {
 
             <!-- Exibe Login ou perfil dependendo do estado de login -->
             <?php if (isset($_SESSION['usuario_email'])) { ?>
-                <a href="perfil.php">Perfil</a>
-                <a href="logout.php">Logout</a>
+                <a href="../perfil/perfil.php">Perfil</a>
+                <a href="../header/logout.php">Logout</a>
             <?php } else { ?>
-                <a href="login.php">Login</a>
+                <a href="../login/login.php">Login</a>
             <?php } ?>
         </div>
 

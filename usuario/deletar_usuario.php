@@ -1,32 +1,23 @@
+<!-- deletar_usuario.php -->
 <?php
-// Inclui as classes de banco de dados e usuário
-include 'Database.php';
-include 'Usuario.php';
+include 'db/Database.php';  // Inclui a conexão com o banco de dados
 
-// Verifica se o e-mail foi passado na URL
-if (isset($_GET['email'])) {
-    $email = $_GET['email'];
+// Criar uma instância da classe de conexão
+$database = new Database();
+$db = $database->getConnection();
 
-    // Cria a instância da conexão com o banco de dados
-    $database = new Database();
-    $db = $database->getConnection();
+$id = isset($_GET['id']) ? $_GET['id'] : die('ID do usuário não fornecido.');
 
-    // Instancia a classe Usuario
-    $usuario = new Usuario($db);
+// Deletar o usuário
+$query = "DELETE FROM usuarios WHERE id = :id";
+$stmt = $db->prepare($query);
+$stmt->bindParam(':id', $id);
 
-    // Tenta excluir o usuário
-    if ($usuario->deletarUsuario($email)) {
-        echo "Usuário deletado com sucesso!";
-        // Redireciona para a página de listagem
-        header("Location: listar_usuarios.php");
-        exit();
-    } else {
-        echo "Erro ao excluir o usuário!";
-    }
-
-    // Fecha a conexão
-    $db = null;
+if ($stmt->execute()) {
+    // Redireciona para a lista de usuários
+    header("Location: listar_usuarios.php?status=success");
 } else {
-    echo "Email não fornecido!";
+    // Redireciona de volta com erro
+    header("Location: listar_usuarios.php?status=error");
 }
 ?>

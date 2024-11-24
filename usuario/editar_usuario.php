@@ -1,61 +1,61 @@
+<!-- editar_usuario.php -->
 <?php
-// Inclui as classes de banco de dados e usuário
-include '../db/Database.php';
-include 'Usuario.php';
+include 'db/Database.php';  // Inclui a conexão com o banco de dados
 
-// Cria a instância da conexão com o banco de dados
+// Criar uma instância da classe de conexão
 $database = new Database();
 $db = $database->getConnection();
 
-// Instancia a classe Usuario
-$usuario = new Usuario($db);
+$id = isset($_GET['id']) ? $_GET['id'] : die('ID do usuário não fornecido.');
 
-// Verificar se o parâmetro 'email' foi passado pela URL
-if (isset($_GET['email'])) {
-    $usuario_email = $_GET['email'];
+// Consultar o usuário pelo ID
+$query = "SELECT * FROM usuarios WHERE id = :id LIMIT 1";
+$stmt = $db->prepare($query);
+$stmt->bindParam(':id', $id);
+$stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Consultar usuário com o email específico
-    $usuarioInfo = $usuario->buscarUsuarioPorEmail($usuario_email);
-
-    if (!$usuarioInfo) {
-        echo "Usuário não encontrado!";
-        exit();
-    }
-}
-
-// Verificar se o formulário foi enviado para editar
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Coletar dados do formulário
-    $email = $_POST['email'];
-    $nome = $_POST['nome'];
-    $telefone = $_POST['telefone'];
-    $datanascimento = $_POST['datanascimento'];
-    $tipo_usuario = $_POST['tipo_usuario'];
-
-    // Atualizar dados do usuário
-    if ($usuario->editarUsuario($email, $nome, $telefone, $datanascimento, $tipo_usuario)) {
-        echo "Usuário atualizado com sucesso!";
-        // Redireciona para a página de listagem de usuários
-        header("Location: listar_usuarios.php");
-        exit();
-    } else {
-        echo "Erro ao atualizar o usuário.";
-    }
+if (!$user) {
+    die('Usuário não encontrado.');
 }
 ?>
 
-<form action="editar_usuario.php?email=<?php echo $usuario_email; ?>" method="POST">
-    <input type="hidden" name="email" value="<?php echo $usuarioInfo['email']; ?>">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuário</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="title is-2">Editar Usuário</h2>
 
-    <!-- Outros campos de dados do usuário -->
-    <input type="text" name="nome" value="<?php echo $usuarioInfo['nome']; ?>" required>
-    <input type="email" name="email" value="<?php echo $usuarioInfo['email']; ?>" required>
-    <input type="text" name="telefone" value="<?php echo $usuarioInfo['telefone']; ?>">
-    <input type="date" name="datanascimento" value="<?php echo $usuarioInfo['datanascimento']; ?>">
-    <select name="tipo_usuario">
-        <option value="admin" <?php if ($usuarioInfo['tipo_usuario'] == 'admin') echo 'selected'; ?>>Admin</option>
-        <option value="cliente" <?php if ($usuarioInfo['tipo_usuario'] == 'cliente') echo 'selected'; ?>>Cliente</option>
-        <option value="freelancer" <?php if ($usuarioInfo['tipo_usuario'] == 'freelancer') echo 'selected'; ?>>Freelancer</option>
-    </select>
-    <button type="submit">Atualizar</button>
-</form>
+        <!-- Formulário para editar usuário -->
+        <form action="processar_editar_usuario.php" method="POST">
+            <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
+
+            <div class="field">
+                <label class="label" for="nome">Nome:</label>
+                <div class="control">
+                    <input class="input" type="text" name="nome" id="nome" value="<?php echo htmlspecialchars($user['nome']); ?>" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label" for="email">Email:</label>
+                <div class="control">
+                    <input class="input" type="email" name="email" id="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary" type="submit">Atualizar Usuário</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
