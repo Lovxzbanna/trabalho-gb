@@ -1,7 +1,6 @@
 <?php
 // Incluir a conexão com o banco de dados e as classes
 require_once 'header.php';
-
 ?>
 
 <!DOCTYPE html>
@@ -13,33 +12,83 @@ require_once 'header.php';
     <link rel="stylesheet" href="style.css"> <!-- Certifique-se de que o caminho está correto -->
     <style>
         /* Estilos que você já forneceu */
+        /* Reset de estilos padrões */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Corpo da Página */
         body {
             font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #4a6fa5, #a8d0e6);
             color: #333;
             padding: 0;
+            min-height: 100vh;
         }
 
+        /* Estilo para o container principal */
         .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 30px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
             background-color: #fff;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Títulos */
+        h2, h3, h4 {
+            color: #4a6fa5;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
 
         h2 {
             font-size: 28px;
-            color: blue;
         }
 
+        h3 {
+            font-size: 24px;
+        }
+
+        h4 {
+            font-size: 20px;
+        }
+
+        /* Parágrafos */
         p {
             font-size: 18px;
             line-height: 1.6;
             margin-bottom: 20px;
         }
 
+        /* Listas */
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        ul li {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        /* Estilo para links */
+        a {
+            color: #FF4D94;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Informações de Contato e Redes Sociais */
         .contact-info, .social-links {
             font-size: 18px;
             margin-top: 30px;
@@ -67,12 +116,49 @@ require_once 'header.php';
         .social-links ul li a:hover {
             text-decoration: underline;
         }
+
+        /* Adicionando uma borda ao redor de algumas seções */
+        ul, p, ol {
+            margin-top: 20px;
+        }
+
+        /* Estilo do Footer */
+        footer {
+            background-color: #4a6fa5;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 24px;
+            }
+
+            h3 {
+                font-size: 22px;
+            }
+
+            h4 {
+                font-size: 18px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+
+            ul li {
+                font-size: 14px;
+            }
+                    }
+        
     </style>
 </head>
 <body>
-    
-    <div class="container"> 
-        <h2>Bem-vindo ao CemFreelas: A Plataforma Perfeita para Freelancers e Clientes!</h2>
+<div> <h2>Bem-vindo ao CemFreelas: A Plataforma Perfeita para Freelancers e Clientes!</h2>
         <p>O <strong>CemFreelas</strong> é um site inovador que conecta freelancers e clientes, proporcionando um ambiente dinâmico onde projetos podem ser propostos, contratados e avaliados de forma simples e segura. Se você é freelancer e busca novos desafios, ou se você é cliente em busca de profissionais para realizar seus projetos, o CemFreelas é o lugar certo para você!</p>
 
         <p>Nosso sistema é estruturado para atender a diferentes tipos de usuários, com funcionalidades voltadas para facilitar a criação de projetos, comunicação entre as partes e uma avaliação transparente das experiências. Abaixo, explicamos como o site funciona para cada tipo de usuário.</p>
@@ -118,20 +204,27 @@ require_once 'header.php';
         </ul>
 
         <h3>Como Funciona o CemFreelas?</h3>
-        <p>A plataforma foi pensada para ser intuitiva e fácil de usar. Veja um resumo de como funciona:</p>
-        <ol>
-            <li><strong>Criação de Conta:</strong> Cadastre-se como freelancer ou cliente, criando uma conta rápida.</li>
-            <li><strong>Propostas de Projetos:</strong> Freelancers podem criar e publicar projetos. Clientes podem navegar entre os projetos ou buscar freelancers para contratar.</li>
-            <li><strong>Mensagens e Negociações:</strong> Use o sistema de mensagens para se comunicar, negociar preços e discutir detalhes do trabalho.</li>
-            <li><strong>Avaliação:</strong> Ao concluir um projeto, você poderá deixar uma avaliação sobre a experiência. Isso ajuda a manter a qualidade e a confiança na plataforma.</li>
-            <li><strong>Acompanhamento:</strong> Ambos, freelancers e clientes, podem acompanhar o andamento dos projetos, ver mensagens e manter tudo organizado em um painel de controle.</li>
-        </ol>
+        <p>A plataforma foi pensada para proporcionar uma experiência simples e eficaz para todos os usuários. Se você ainda tem dúvidas, não hesite em nos contactar ou acessar a nossa seção de Perguntas Frequentes. Estamos sempre à disposição para ajudar e melhorar sua experiência no CemFreelas!</p>
 
-        <h3>Conclusão:</h3>
-        <p>O <strong>CemFreelas</strong> é a solução ideal para quem deseja conectar-se com profissionais qualificados ou para quem quer encontrar novos desafios na área de freelancing. Nossa plataforma proporciona uma experiência fluida e segura, onde tanto freelancers quanto clientes podem colaborar para realizar grandes projetos. Se você busca uma forma prática e confiável de trabalhar ou contratar, o CemFreelas é o lugar certo para você!</p>
+        <div class="contact-info">
+            <h4>Entre em Contato:</h4>
+            <p>Email: <a href="mailto:contato@cemfreelas.com.br">contato@cemfreelas.com.br</a></p>
+            <p>Telefone: (21) 1234-5678</p>
+        </div>
+
+        <div class="social-links">
+            <h4>Siga-nos nas redes sociais:</h4>
+            <ul>
+                <li><a href="https://www.facebook.com/cemfreelas" target="_blank">Facebook</a></li>
+                <li><a href="https://www.instagram.com/cemfreelas" target="_blank">Instagram</a></li>
+                <li><a href="https://www.twitter.com/cemfreelas" target="_blank">Twitter</a></li>
+            </ul>
+        </div>
+        
+
+        <footer>
+            <p>&copy; 2024 CemFreelas - Todos os direitos reservados</p>
+        </footer>
     </div>
-
-    <?php require_once '../header/footer.php'; ?> <!-- Correção aqui -->
-
 </body>
 </html>

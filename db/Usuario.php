@@ -1,30 +1,25 @@
 <?php
 class Usuario {
     private $conn;
-    private $table = 'usuarios';  // Supondo que o nome da tabela seja 'usuarios'
 
-    // Definindo o construtor para a conexão com o banco
     public function __construct($conn) {
         $this->conn = $conn;
     }
 
-    // Método para obter os dados do usuário com base no e-mail
-    public function getUsuarioByEmail($email) {
-        // Query SQL para buscar todos os dados necessários do usuário
-        $query = "SELECT nome, email, foto_perfil, redes_sociais, portfolio FROM " . $this->table . " WHERE email = :email LIMIT 1";
-
-        // Preparando a query
+    // Método para obter o nome do usuário pelo e-mail
+    public function obterNomePorEmail($email) {
+        $query = "SELECT nome FROM usuarios WHERE email = :email LIMIT 1";
         $stmt = $this->conn->prepare($query);
-
-        // Bindando o parâmetro de email
         $stmt->bindParam(':email', $email);
-
-        // Executando a query
         $stmt->execute();
-
-        // Retorna o resultado
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        // Verificar se o usuário foi encontrado e retornar o nome
+        if ($stmt->rowCount() > 0) {
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $usuario['nome'];
+        } else {
+            return 'Usuário não encontrado';
+        }
     }
 }
-
 ?>

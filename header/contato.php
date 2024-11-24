@@ -24,149 +24,126 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fale Conosco - CemFreelas</title>
-    <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
     <style>
-        /* Resetando o estilo de algumas tags */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+ /* Resetando o estilo de algumas tags */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* Estilo Geral da Página */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
+/* Estilo Geral da Página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo */
+    justify-content: center; /* Mantém o alinhamento */
+    min-height: 100vh;
+}
 
-        /* Container Principal */
-        .container {
-            max-width: 1000px;
-            width: 100%;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
+/* Container Principal */
+.container {
+    max-width: 1000px; /* Largura máxima */
+    width: 90%; /* Ajuste em telas menores */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 30px 0; /* Espaço superior e inferior */
+}
 
-        h2 {
-            font-size: 24px;
-            color: #007bff; /* Azul */
-            margin-bottom: 15px;
-        }
+/* Títulos */
+h2 {
+    font-size: 24px;
+    color: #007bff; /* Azul */
+    margin-bottom: 15px;
+}
 
-        /* Contato - Informações */
-        .contact-info {
-            margin-bottom: 30px;
-        }
+/* Contato - Informações */
+.contact-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
 
-        .contact-info p {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
+/* Links */
+.contact-info a,
+.social-links a {
+    color: #007bff; /* Azul */
+    text-decoration: none;
+}
 
-        .contact-info strong {
-            font-weight: bold;
-            color: #555;
-        }
+.contact-info a:hover,
+.social-links a:hover {
+    text-decoration: underline;
+}
 
-        /* Links de E-mail */
-        .contact-info a {
-            color: #007bff; /* Azul */
-            text-decoration: none;
-        }
+/* Redes Sociais */
+.social-links ul {
+    list-style-type: none;
+    padding-left: 0;
+}
 
-        .contact-info a:hover {
-            text-decoration: underline;
-        }
+.social-links li {
+    margin: 10px 0;
+}
 
-        /* Redes Sociais */
-        .social-links {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+/* Formulário */
+form {
+    display: flex;
+    flex-direction: column;
+}
 
-        .social-links ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
+label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
 
-        .social-links li {
-            margin: 10px 0;
-        }
+input[type="text"],
+input[type="email"],
+textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
 
-        .social-links a {
-            color: #007bff; /* Azul */
-            text-decoration: none;
-            font-size: 16px;
-        }
+textarea {
+    resize: vertical;
+}
 
-        .social-links a:hover {
-            text-decoration: underline;
-        }
+button {
+    padding: 10px 15px;
+    background-color: #007bff; /* Azul */
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
 
-        /* Formulário */
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+button:hover {
+    background-color: #0056b3; /* Azul escuro */
+}
 
-        label {
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
 
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
+    h2 {
+        font-size: 20px;
+    }
+}
 
-        textarea {
-            resize: vertical;
-        }
-
-        button {
-            padding: 10px 15px;
-            background-color: #007bff; /* Azul */
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        button:hover {
-            background-color: #0056b3; /* Azul escuro */
-        }
-
-        /* Estilos Responsivos */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            h2 {
-                font-size: 20px;
-            }
-        }
     </style>
 
     <div class="container">

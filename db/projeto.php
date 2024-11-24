@@ -1,47 +1,24 @@
 <?php
-
 class Projeto {
     private $conn;
 
-    // Construtor
     public function __construct($conn) {
         $this->conn = $conn;
     }
 
-    // Método para criar um novo projeto
-    public function createProject($nome_produto, $descricao, $valor, $usuario_email, $foto) {
-        $query = "INSERT INTO projetos (nome_produto, descricao, valor, usuario_email, foto) 
-                  VALUES (:nome_produto, :descricao, :valor, :usuario_email, :foto)";
-        
-        $stmt = $this->conn->prepare($query);
+    // Método para buscar projetos com base em um termo
+    public function buscarProjetos($query) {
+        // SQL para buscar projetos pelo nome ou descrição
+        $sql = "SELECT * FROM projetos WHERE nome_produto LIKE :query OR descricao LIKE :query";
+        $stmt = $this->conn->prepare($sql);
 
-        // Vinculando os parâmetros
-        $stmt->bindParam(':nome_produto', $nome_produto);
-        $stmt->bindParam(':descricao', $descricao);
-        $stmt->bindParam(':valor', $valor);
-        $stmt->bindParam(':usuario_email', $usuario_email); 
-        $stmt->bindParam(':foto', $foto);
-
-        // Executando a consulta
-        if ($stmt->execute()) {
-            return true; // Projeto inserido com sucesso
-        } else {
-            return false; // Erro ao inserir o projeto
-        }
-    }
-
-    // Método para buscar projetos por email de usuário
-    public function getProjetosPorUsuario($usuario_email) {
-        $query = "SELECT * FROM projetos WHERE usuario_email = :usuario_email";
-        
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':usuario_email', $usuario_email);
-        
+        // Definir o parâmetro para a busca, utilizando % para buscar em qualquer parte do nome/descrição
+        $searchQuery = "%".$query."%";
+        $stmt->bindParam(':query', $searchQuery);
         $stmt->execute();
 
-        // Retorna os resultados como um array associativo
+        // Retornar os resultados encontrados
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-
 ?>

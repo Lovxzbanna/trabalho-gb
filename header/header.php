@@ -65,7 +65,7 @@ session_start();
             cursor: pointer;
         }
 
-        /* Menu de navegação */
+        /* Menu de Navegação */
         .nav-links {
             display: flex;
             gap: 20px;
@@ -137,22 +137,21 @@ session_start();
         <div class="logo">CemFreelas</div>
 
         <!-- Barra de Pesquisa -->
-        <div class="search-bar">
-            <input type="text" placeholder="Pesquisar...">
-            <button>Pesquisar</button>
-        </div>
+        <form action="../login/pesquisar.php" method="GET" class="search-bar">
+            <input type="text" name="query" placeholder="Pesquisar...">
+            <button type="submit">Pesquisar</button>
+        </form>
 
         <!-- Menu de Navegação -->
         <div class="nav-links">
-            <a href="home.php">Home</a>
-            <a href="sobre.php">Sobre</a>
-            <a href="contato.php">Contato</a>
-            <?php if (isset($_SESSION['usuario_email'])) { ?>
-                <a href="perfil.php">Perfil</a>
-                <a href="meus_projetos.php">Meus Projetos</a>
-                <a href="postar_projeto.php">Postar Projeto</a>
-                <a href="../header/logout.php">Logout</a>
-            <?php } ?>
+    <a href="../header/sobre.php">Sobre</a>
+    <a href="../header/contato.php">Contato</a>
+    <?php if (isset($_SESSION['usuario_email'])) { ?>
+        <a href="../perfil/perfil.php">Perfil</a>
+        <a href="../projeto/meus_projetos.php">Meus Projetos</a>
+        <a href="../projeto/postar_projeto.php">Postar Projeto</a>
+        <a href="../header/logout.php">Logout</a>
+    <?php } ?>
         </div>
 
         <!-- Hamburger Menu -->

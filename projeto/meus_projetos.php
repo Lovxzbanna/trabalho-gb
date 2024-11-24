@@ -90,8 +90,9 @@ try {
             <p><strong>Valor:</strong> R$ <?php echo number_format((float)$projeto['valor'], 2, ',', '.'); ?></p>
 
             <!-- Links de edição e exclusão -->
-            <a href="editar_projeto.php?id=<?php echo $projeto['id']; ?>" class="btn-editar">Editar</a>
-            <a href="excluir_projeto.php?id=<?php echo $projeto['id']; ?>" class="btn-excluir">Excluir</a>
+            <a href="projetos/editar_projeto.php?id=<?php echo $projeto['id']; ?>" class="btn-editar">Editar</a>
+<a href="projetos/excluir_projeto.php?id=<?php echo $projeto['id']; ?>" class="btn-excluir">Excluir</a>
+
         </div>
     <?php endforeach; ?>
 <?php else: ?>

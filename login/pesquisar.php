@@ -3,13 +3,13 @@
 session_start();
 
 // Incluir as classes
-include_once 'Database.php';
-include_once 'Projeto.php';
-include_once 'Usuario.php';
+include_once '../db/DB.php';
+include_once '../db/projeto.php';
+include_once '../db/Usuario.php';
 
 // Criar instância da classe de banco de dados e conectar
-$database = new Database();
-$conn = $database->connect();
+$db = new db();
+$conn = $db->connect();
 
 // Obter o termo de busca
 $query = isset($_GET['query']) ? $_GET['query'] : '';
@@ -17,17 +17,20 @@ $query = isset($_GET['query']) ? $_GET['query'] : '';
 // Verificar se o usuário está logado
 $usuario_nome = 'Visitante';
 if (isset($_SESSION['usuario_email'])) {
-    $usuario_email = $_SESSION['usuario_    email'];
+    $usuario_email = $_SESSION['usuario_email'];
     $usuario = new Usuario($conn);
-    $usuario_nome = $usuario->obterNomePorEmail($usuario_email);
+    $usuario_nome = $usuario->obterNomePorEmail($usuario_email);  // Aqui não deverá mais dar erro
 }
 
+
+// Buscar os projetos
 // Buscar os projetos
 $projeto = new Projeto($conn);
 $resultados = [];
 if ($query) {
     $resultados = $projeto->buscarProjetos($query);
 }
+
 ?>
 
 <!DOCTYPE html>
