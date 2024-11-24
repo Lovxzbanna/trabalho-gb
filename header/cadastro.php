@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../db/DB.php'; // Classe DB para conexão com o banco de dados
+include '../db/DB.php'; // Incluir a classe DB
 
 // Variável para armazenar erros
 $erro = '';
@@ -19,9 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($senha !== $senha_confirm) {
         $erro = "As senhas não coincidem!";
     } else {
-        // Conectar ao banco de dados
+        // Conectar ao banco de dados usando a classe DB
         $DB = new DB();
-        $conn = $DB->getConnection();
+        $conn = $DB->connect(); // Chama o método connect()
 
         if ($conn === null) {
             $erro = "Erro ao conectar ao banco de dados.";
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt = $conn->prepare($query);
                 $stmt->bindParam(':nome', $nome);
                 $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':senha', $senha); // Senha em texto simples
+                $stmt->bindParam(':senha', $senha); // Senha sem hashing
                 $stmt->bindParam(':tipo_usuario', $tipo_usuario);
                 $stmt->bindParam(':data_nascimento', $data_nascimento);
 

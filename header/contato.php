@@ -24,126 +24,125 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <title>Fale Conosco - CemFreelas</title>
 </head>
 <body>
     <style>
- /* Resetando o estilo de algumas tags */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        /* Resetando o estilo de algumas tags */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Estilo Geral da Página */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza o conteúdo */
-    justify-content: center; /* Mantém o alinhamento */
-    min-height: 100vh;
-}
+        /* Estilo Geral da Página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza o conteúdo */
+            justify-content: center; /* Mantém o alinhamento */
+            min-height: 100vh;
+        }
 
-/* Container Principal */
-.container {
-    max-width: 1000px; /* Largura máxima */
-    width: 90%; /* Ajuste em telas menores */
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 30px 0; /* Espaço superior e inferior */
-}
+        /* Container Principal */
+        .container {
+            max-width: 1000px; /* Largura máxima */
+            width: 90%; /* Ajuste em telas menores */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 30px 0; /* Espaço superior e inferior */
+        }
 
-/* Títulos */
-h2 {
-    font-size: 24px;
-    color: #007bff; /* Azul */
-    margin-bottom: 15px;
-}
+        /* Títulos */
+        h2 {
+            font-size: 24px;
+            color: #007bff; /* Azul */
+            margin-bottom: 15px;
+        }
 
-/* Contato - Informações */
-.contact-info p {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
+        /* Contato - Informações */
+        .contact-info p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
 
-/* Links */
-.contact-info a,
-.social-links a {
-    color: #007bff; /* Azul */
-    text-decoration: none;
-}
+        /* Links */
+        .contact-info a,
+        .social-links a {
+            color: #007bff; /* Azul */
+            text-decoration: none;
+        }
 
-.contact-info a:hover,
-.social-links a:hover {
-    text-decoration: underline;
-}
+        .contact-info a:hover,
+        .social-links a:hover {
+            text-decoration: underline;
+        }
 
-/* Redes Sociais */
-.social-links ul {
-    list-style-type: none;
-    padding-left: 0;
-}
+        /* Redes Sociais */
+        .social-links ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
 
-.social-links li {
-    margin: 10px 0;
-}
+        .social-links li {
+            margin: 10px 0;
+        }
 
-/* Formulário */
-form {
-    display: flex;
-    flex-direction: column;
-}
+        /* Formulário */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
 
-label {
-    font-size: 14px;
-    margin-bottom: 5px;
-}
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
 
-input[type="text"],
-input[type="email"],
-textarea {
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
 
-textarea {
-    resize: vertical;
-}
+        textarea {
+            resize: vertical;
+        }
 
-button {
-    padding: 10px 15px;
-    background-color: #007bff; /* Azul */
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-}
+        button {
+            padding: 10px 15px;
+            background-color: #007bff; /* Azul */
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
-button:hover {
-    background-color: #0056b3; /* Azul escuro */
-}
+        button:hover {
+            background-color: #0056b3; /* Azul escuro */
+        }
 
-/* Estilos Responsivos */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
+        /* Estilos Responsivos */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
 
-    h2 {
-        font-size: 20px;
-    }
-}
-
+            h2 {
+                font-size: 20px;
+            }
+        }
     </style>
 
     <div class="container">
@@ -167,22 +166,11 @@ button:hover {
             </ul>
         </div>
 
-        <!-- Formulário de Contato -->
-        <h2>Entre em Contato</h2>
-        <form action="fale_conosco.php" method="POST">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" required>
-
-                <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required>
-
-            <label for="mensagem">Mensagem:</label>
-            <textarea name="mensagem" id="mensagem" rows="5" required></textarea>
-
-            <button type="submit">Enviar Mensagem</button>
-        </form>
+        <!-- Link para o formulário de contato -->
+        <a href="fale_conosco.php" class="button">Enviar Mensagem</a>
     </div>
-
-    <?php include '../header/footer.php'?>
 </body>
+
+<?php include '../header/footer.php'?>
+
 </html>

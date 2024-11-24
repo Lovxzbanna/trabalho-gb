@@ -1,11 +1,28 @@
-<?php
-session_start();
+<?php 
 
-// Verificar se o usuário está logado
-if (!isset($_SESSION['usuario_email'])) {
-    // Se não estiver logado, redirecionar para a página de login
-    header("Location: login.php");
-    exit();
+// Inclusão dos arquivos de conexão e de usuário
+require_once '../db/DB.php';
+require_once '../db/Usuario.php';
+
+// Conexão com o banco de dados
+$database = new DB();
+$conn = $database->connect();
+
+// Variáveis padrão para usuário não logado
+$nome_usuario = 'Visitante';
+$foto_perfil = '../img/projetos/fotoperfil.png'; // Foto de perfil padrão
+
+// Verifica se o usuário está logado
+if (isset($_SESSION['usuario_email'])) {
+    $email_usuario = $_SESSION['usuario_email'];
+    $usuario = new Usuario($conn);
+    $usuario_data = $usuario->getUsuarioByEmail($email_usuario);
+
+    if ($usuario_data) {
+        $nome_usuario = $usuario_data['nome'];
+        // Verifica se o usuário tem foto de perfil, senão usa a foto padrão
+        $foto_perfil = !empty($usuario_data['foto_perfil']) ? $usuario_data['foto_perfil'] : $foto_perfil;
+    }
 }
 ?>
 
@@ -16,6 +33,7 @@ if (!isset($_SESSION['usuario_email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel - CemFreelas</title>
     <style>
+        /* CSS mantido exatamente como você forneceu */
         * {
             margin: 0;
             padding: 0;
@@ -30,159 +48,168 @@ if (!isset($_SESSION['usuario_email'])) {
             min-height: 100vh;
         }
 
-        /* Estilo para o menu */
-        .navbar {
-            background-color: #6A4C9C;
-            padding: 10px 20px;
+        .main-content {
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .welcome-section {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
-        .navbar .logo {
-            font-size: 24px;
-            color: white;
-            font-weight: bold;
-        }
-
-        /* Barra de Pesquisa */
-        .search-bar {
-            flex-grow: 1;
-            max-width: 400px;
+        .user-info {
             display: flex;
-            margin-left: 20px;
+            align-items: center;
         }
 
-        .search-bar input {
-            width: 100%;
-            padding: 8px;
-            border-radius: 20px;
-            border: none;
-            outline: none;
-            font-size: 16px;
+        .profile-pic {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border: 4px solid #D8A6D1;
+            object-fit: cover;
         }
 
-        .search-bar button {
-            padding: 8px 12px;
-            background-color: #D8A6D1;
-            color: white;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
+        h2 {
+            font-size: 26px;
+            color: #6A4C9C;
         }
 
-        /* Menu de Navegação */
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
+        p {
             font-size: 18px;
+            color: #333;
         }
 
-        .hamburger-menu {
-            display: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
+        .how-it-work-cards {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .hamburger-menu div {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-        }
-
-        /* Estilo do menu quando estiver ativo (visível em dispositivos móveis) */
-        .nav-links.active {
-            display: block;
-            position: absolute;
-            top: 60px;
-            left: 0;
-            width: 100%;
-            background-color: #6A4C9C;
+        .how-it-work-card {
+            background-color: #ffffff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 22%;
             padding: 20px;
-            box-sizing: border-box;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
             text-align: center;
         }
 
+        .how-it-work-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            color: #6A4C9C;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .extra-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            color: #6A4C9C;
+        }
+
+        .extra-container p {
+            font-size: 16px;
+            color: #555;
+        }
+
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                width: 100%;
+            .how-it-work-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .how-it-work-card {
+                width: 80%;
+                margin: 10px 0;
             }
 
             .hamburger-menu {
-                display: flex;
+                display: block;
             }
 
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .search-bar {
-                margin-top: 10px;
+            .nav-links {
+                display: none;
                 width: 100%;
-                margin-left: 0;
+                background-color: #D8A6D1;
+                padding: 10px 0;
             }
 
-            .nav-links a {
-                font-size: 16px;
+            .nav-links.active {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
+<?php include '../header/header.php' ?>
+<main class="main-content">
+    <div class="container">
+        <section class="welcome-section">
+            <div class="user-info">
+                <img src="<?php echo htmlspecialchars($foto_perfil); ?>" alt="Foto de Perfil" class="profile-pic">
+                <div>
+                    <h2>Seja bem-vindo, <?php echo htmlspecialchars($nome_usuario); ?>!</h2>
+                    <p>Estamos muito felizes em te ter por aqui. Vamos ajudar você a encontrar as melhores oportunidades ou freelancers para o seu projeto.</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- Navbar -->
-    <header class="navbar">
-        <div class="logo">CemFreelas</div>
-
-        <!-- Barra de Pesquisa -->
-        <form action="pesquisa.php" method="GET" class="search-bar">
-            <input type="text" name="query" placeholder="Pesquisar...">
-            <button type="submit">Pesquisar</button>
-        </form>
-
-        <!-- Menu de Navegação -->
-        <div class="nav-links">
-            <a href="home.php">Home</a>
-            <a href="sobre.php">Sobre</a>
-            <a href="contato.php">Contato</a>
-            <?php if (isset($_SESSION['usuario_email'])) { ?>
-                <a href="perfil.php">Perfil</a>
-                <a href="meus_projetos.php">Meus Projetos</a>
-                <a href="postar_projeto.php">Postar Projeto</a>
-                <a href="logout.php">Logout</a>
-            <?php } ?>
+        <div class="extra-container">
+            <p>Bem-vindo ao CemFreelas, a plataforma que conecta freelancers talentosos e clientes em busca de soluções criativas. Encontre o profissional ideal para seu projeto ou publique suas oportunidades para conquistar novos desafios. Cadastre-se agora e comece a explorar as melhores opções para seu trabalho ou projeto!</p>
         </div>
 
-        <!-- Hamburger Menu -->
-        <div class="hamburger-menu" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </header>
+        <section class="how-it-work-cards">
+            <div class="how-it-work-card">
+                <img src="../img/projetos/publiquepj.jpg" alt="Login" class="card-image">
+                <p class="card-description">Acesse sua conta ou cadastre-se para começar a explorar.</p>
+            </div>
+            <div class="how-it-work-card">
+                <img src="../img/projetos/selecione.avif" alt="Freelancer" class="card-image">
+                <p class="card-description">Encontre freelancers talentosos prontos para trabalhar no seu projeto.</p>
+            </div>
+            <div class="how-it-work-card">
+                <img src="../img/projetos/obtenha.webp" alt="Contrate" class="card-image">
+                <p class="card-description">Contrate o freelancer ideal e comece a trabalhar no seu projeto.</p>
+            </div>
+            <div class="how-it-work-card">
+                <img src="../img/projetos/pagando.avif" alt="Pagamento" class="card-image">
+                <p class="card-description">Nós garantimos que o pagamento seja seguro e que ambas as partes fiquem satisfeitas.</p>
+            </div>
+        </section>
+    </div>
 
-    <!-- Conteúdo da Página -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Seu conteúdo aqui -->
-        </div>
-    </main>
-
-    <script>
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
-        }
-    </script>
-
+    <?php include '../header/footer.php'; ?>
+</main>
 </body>
 </html>

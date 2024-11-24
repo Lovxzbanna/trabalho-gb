@@ -77,6 +77,11 @@ session_start();
             font-size: 18px;
         }
 
+        .nav-links span {
+            color: white;
+            font-size: 18px;
+        }
+
         .hamburger-menu {
             display: none;
             cursor: pointer;
@@ -106,7 +111,7 @@ session_start();
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                width: 100%;
+                    width: 100%;
             }
 
             .hamburger-menu {
@@ -144,14 +149,21 @@ session_start();
 
         <!-- Menu de Navegação -->
         <div class="nav-links">
-    <a href="../header/sobre.php">Sobre</a>
-    <a href="../header/contato.php">Contato</a>
-    <?php if (isset($_SESSION['usuario_email'])) { ?>
-        <a href="../perfil/perfil.php">Perfil</a>
-        <a href="../projeto/meus_projetos.php">Meus Projetos</a>
-        <a href="../projeto/postar_projeto.php">Postar Projeto</a>
-        <a href="../header/logout.php">Logout</a>
-    <?php } ?>
+            <a href="../header/sobre.php">Sobre</a>
+            <a href="../header/contato.php">Contato</a>
+
+            <?php if (isset($_SESSION['usuario_email'])) { ?>
+                <!-- Exibe as opções quando o usuário está logado -->
+                <a href="../perfil/perfil.php">Perfil</a>
+                <a href="../projeto/meus_projetos.php">Meus Projetos</a>
+                <a href="../projeto/postar_projeto.php">Postar Projeto</a>
+                <a href="../header/logout.php">Logout</a>
+            <?php } else { ?>
+                <!-- Exibe a opção de login quando o usuário não está logado -->
+                <a href="../login/login.php">Login</a>
+                <!-- Exibe "Bem-vindo, Visitante!" caso o usuário não esteja logado -->
+                <span>Bem-vindo, Visitante!</span>
+            <?php } ?>
         </div>
 
         <!-- Hamburger Menu -->
@@ -161,13 +173,6 @@ session_start();
             <div></div>
         </div>
     </header>
-
-    <!-- Conteúdo da Página -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Seu conteúdo aqui -->
-        </div>
-    </main>
 
     <script>
         function toggleMenu() {
