@@ -1,4 +1,7 @@
 <?php
+// Incluir o arquivo da classe Usuario
+require_once '../app/models/Usuario.php';
+
 // Incluir o arquivo de conexão com o banco de dados (se necessário)
 require_once '../db/Database.php';
 
@@ -30,6 +33,6 @@ if (isset($_SESSION['usuario_email'])) {
 }
 
 // Redirecionar para a página de login ou painel
-header("Location: ../login/login.php");  // Alterar para a página de login
+header("Location: login.php");  // Alterar para a página de login
 exit();
 ?>

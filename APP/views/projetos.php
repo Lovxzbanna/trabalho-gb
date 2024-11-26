@@ -1,7 +1,7 @@
 <?php
 // projeto.php - Detalhes de um projeto e compra
-include_once '../db/Database.php';
-include_once '../app/controllers/ProjetoController.php';
+include_once '../../db/Database.php';
+include_once 'controllers/ProjetoController.php';
 
 $projetoController = new ProjetoController();
 $projeto = $projetoController->obterProjeto($_GET['id']);

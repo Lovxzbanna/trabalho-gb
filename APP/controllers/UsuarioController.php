@@ -1,6 +1,6 @@
 <?php
 include_once '../models/Usuario.php';
-include_once '../db/Database.php';
+include_once '../../db/Database.php';
 
 class UsuarioController {
     private $db;
@@ -12,35 +12,33 @@ class UsuarioController {
         $this->usuario = new Usuario($this->db);
     }
 
-    // Função para criar usuário
-    public function criarUsuario($nome, $email, $senha) {
-        $this->usuario->nome = $nome;
-        $this->usuario->email = $email;
-        $this->usuario->senha = password_hash($senha, PASSWORD_DEFAULT); // Hash da senha
-
-        if ($this->usuario->criarUsuario()) {
-            echo "Usuário criado com sucesso!";
-        } else {
-            echo "Erro ao criar usuário.";
-        }
+    // Função para buscar usuário por email
+    public function getUsuarioByEmail($email) {
+        return $this->usuario->buscarUsuarioPorEmail($email);
     }
 
     // Função para editar usuário
-    public function editarUsuario($id, $nome, $email) {
-        $this->usuario->id = $id;
-        $this->usuario->nome = $nome;
-        $this->usuario->email = $email;
+    public function editarUsuario() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Pegando os valores do formulário
+            $this->usuario->nome = $_POST['nome'];
+            $this->usuario->email = $_POST['email'];
+            $this->usuario->telefone = $_POST['telefone'];
+            $this->usuario->endereco = $_POST['endereco'];
+            $this->usuario->data_nascimento = $_POST['data_nascimento'];
 
-        if ($this->usuario->editarUsuario()) {
-            echo "Usuário editado com sucesso!";
-        } else {
-            echo "Erro ao editar usuário.";
+            // Editando o usuário
+            if ($this->usuario->editarUsuario()) {
+                echo "Usuário editado com sucesso!";
+            } else {
+                echo "Erro ao editar usuário.";    
+            }
         }
     }
 
     // Função para excluir usuário
-    public function excluirUsuario($id) {
-        $this->usuario->id = $id;
+    public function excluirUsuario($email) {
+        $this->usuario->email = $email;
 
         if ($this->usuario->excluirUsuario()) {
             echo "Usuário excluído com sucesso!";
@@ -51,8 +49,7 @@ class UsuarioController {
 
     // Função para listar usuários
     public function listarUsuarios() {
-        $usuarios = $this->usuario->listarUsuarios();
-        return $usuarios;
+        return $this->usuario->listarUsuarios();
     }
 }
 ?>

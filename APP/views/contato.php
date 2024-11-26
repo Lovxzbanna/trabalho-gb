@@ -304,6 +304,6 @@
         navLinks.classList.toggle('active');
     }
 </script>
-<?php include '../header/header.php' ?>
+<?php include 'header.php' ?>
 </body>
 </html>

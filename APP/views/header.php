@@ -154,15 +154,15 @@ body {
     <!-- Menu de Navegação -->
     <div class="nav-links">
         <a href="../APP/views/sobre.php">Sobre</a>
-        <a href="../APP/views/contato.php">Contato</a>
-        <a href="../projeto/projetos.php">Projetos</a>
+        <a href="../contato.php">Contato</a>
+        <a href="projetos.php">Projetos</a>
 
         <!-- Exibe Login ou perfil dependendo do estado de login -->
         <?php if (isset($_SESSION['usuario_email'])) { ?>
-            <a href="../perfil/perfil.php">Perfil</a>
+            <a href="../APP/views/perfil.php">Perfil</a>
             <a href="../public/logout.php">Logout</a>
         <?php } else { ?>
-            <a href="../login/login.php">Login</a>
+            <a href="../public/login.php">Login</a>
         <?php } ?>
     </div>
 

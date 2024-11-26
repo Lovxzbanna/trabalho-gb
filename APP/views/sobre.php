@@ -1,4 +1,5 @@
-<?php session_start(); ?> <!-- Inicia a sessão PHP -->
+<?php 
+include 'header.php'?> <!-- Inicia a sessão PHP -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -190,50 +191,10 @@
             text-decoration: underline;
         }
 
-        /* Estilo do Footer */
-        footer {
-            background-color: transparent; /* Cor de fundo azul do painel */
-            color: white;
-            padding: 25px;
-            text-align: center;
-            margin-top: 50px;
-            border-radius: 0 0 15px 15px;
-        }
+        
     </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-        <div class="logo">CemFreelas</div>
-
-        <!-- Barra de Pesquisa -->
-        <form action="../login/pesquisar.php" method="GET" class="search-bar">
-            <input type="text" name="query" placeholder="Pesquisar...">
-            <button type="submit">Pesquisar</button>
-        </form>
-
-        <!-- Menu de Navegação -->
-        <div class="nav-links">
-            <a href="../header/sobre.php">Sobre</a>
-            <a href="../header/contato.php">Contato</a>
-            <a href="projetos.php">Projetos</a>
-
-            <!-- Exibe Login ou perfil dependendo do estado de login -->
-            <?php if (isset($_SESSION['usuario_email'])) { ?>
-                <a href="../perfil/perfil.php">Perfil</a>
-                <a href="../header/logout.php">Logout</a>
-            <?php } else { ?>
-                <a href="../login/login.php">Login</a>
-            <?php } ?>
-        </div>
-
-        <!-- Hamburger Menu -->
-        <div class="hamburger-menu" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </header>
 
     <!-- Conteúdo Principal -->
     <div class="container">
@@ -266,16 +227,13 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 CemFreelas - Todos os direitos reservados.</p>
-    </footer>
-
+    
     <script>
         function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('show');
         }
     </script>
+<?php include 'footer.php'?>    
 </body>
 </html>

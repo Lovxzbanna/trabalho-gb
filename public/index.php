@@ -18,8 +18,8 @@ if (isset($_SESSION['usuario_email'])) {
     $email_usuario = $_SESSION['usuario_email'];  // Recupera o e-mail do usuário logado
     $usuario = new Usuario($conn);  // Cria um objeto da classe Usuario
     
-    // Chama o método getUsuarioByEmail para buscar os dados do usuário
-    $usuario_data = $usuario->getUsuarioByEmail($email_usuario);
+    // Chama o método buscarUsuarioPorEmail para buscar os dados do usuário
+    $usuario_data = $usuario->buscarUsuarioPorEmail($email_usuario);
 
     // Verifica se os dados do usuário foram encontrados
     if ($usuario_data) {
@@ -112,7 +112,7 @@ if (isset($_SESSION['usuario_email'])) {
         background: linear-gradient(135deg, #4A76A8, #6A4C9C, #D8A6D1); /* Gradiente azul, roxo e rosa */
         color: #333;
         min-height: 100vh;
-        line-height: 1.6;
+        line-height: 1,5;
     }
 
     /* Layout principal */
@@ -257,22 +257,5 @@ if (isset($_SESSION['usuario_email'])) {
             display: none;
         }
     }
-
-    /* Rodapé */
-    footer {
-        background-color: #6A4C9C;
-        padding: 20px;
-        color: white;
-        text-align: center;
-    }
-
-    footer a {
-        color: #D8A6D1;
-        text-decoration: none;
-        margin: 0 10px;
-    }
-
-    footer a:hover {
-        color: #fff;
-    }
+    
 </style>

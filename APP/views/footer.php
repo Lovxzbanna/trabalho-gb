@@ -3,21 +3,13 @@
 </footer>
 
 <style>
-    footer {
-        background: transparent;
-        color: white;
-        padding: 20px;
-        text-align: center;
-    }
-
-    footer a {
-        background: linear-gradient(135deg, #4A76A8, #A3C9FF); /* Gradiente azul */
-        text-decoration: none;
-        margin: 0 10px;
-        background: linear-gradient(135deg, #4A76A8, #A3C9FF); /* Gradiente azul */
-    }
-
-    footer a:hover {
-        text-decoration: underline;
-    }
+   /* Estilo do Footer */
+   footer {
+            background-color: transparent; /* Cor de fundo azul do painel */
+            color: white;
+            padding: 25px;
+            text-align: center;
+            margin-top: 50px;
+            border-radius: 0 0 15px 15px;
+        }
 </style>

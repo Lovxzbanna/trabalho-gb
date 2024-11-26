@@ -2,14 +2,15 @@
 // editar_perfil.php - Edição do perfil de usuário
 session_start();
 
+// Verifica se o método de requisição é POST para editar o perfil
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include_once '../db/Database.php';
-    include_once '../app/controllers/UsuarioController.php';
+    include_once '../../app/controllers/UsuarioController.php';  // Caminho corrigido
     $usuarioController = new UsuarioController();
     $usuarioController->editarPerfil($_SESSION['user_id'], $_POST['nome'], $_POST['email'], $_POST['senha']);
 }
 
-include_once '../app/controllers/UsuarioController.php';
+// Incluir novamente o controller para obter os dados do usuário
+include_once '../../app/controllers/UsuarioController.php';  // Caminho corrigido
 $usuarioController = new UsuarioController();
 $usuario = $usuarioController->obterUsuario($_SESSION['user_id']);
 ?>
