@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* Estilo básico da página */
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #A3C8FF, #C7E8FF); /* Gradiente suave de azul claro */
+            background: linear-gradient(135deg, #9b59b6, #8e44ad); /* Gradiente roxo */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* Título do formulário */
         h2 {
             font-size: 28px;
-            color: #007BFF; /* Azul forte */
+            color: #2c3e50; /* Cor escura para o título */
             margin-bottom: 20px;
         }
 
@@ -97,12 +97,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             border-radius: 25px;
             margin-bottom: 15px;
             background-color: #f9f9f9;
-            color: #333;
+            color: #34495e; /* Cor mais suave e escura para o texto dos campos */
             transition: border-color 0.3s;
         }
 
         .input-field:focus {
-            border-color: #007BFF; /* Foco na borda com cor azul */
+            border-color: #8e44ad; /* Foco na borda com roxo */
             outline: none;
         }
 
@@ -110,7 +110,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         .submit-btn {
             width: 100%;
             padding: 12px;
-            background-color: #007BFF; /* Azul forte */
+            background-color: #6f42c1; /* Cor roxa para o botão */
             color: white;
             font-size: 16px;
             border: none;
@@ -120,13 +120,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         .submit-btn:hover {
-            background-color: #0056b3; /* Cor mais forte no hover */
+            background-color: #5e3b8e; /* Cor mais escura no hover */
             transform: scale(1.05); /* Efeito de aumentar o botão */
         }
 
         /* Mensagem de erro */
         .error {
-            color: red;
+            color: #e74c3c; /* Vermelho suave para mensagens de erro */
             font-size: 14px;
             margin-bottom: 10px;
         }
@@ -134,11 +134,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         /* Link para o cadastro */
         .signup-link {
             margin-top: 20px;
-            color: #6c757d; /* Cor suave para o texto */
+            color: #8e44ad; /* Cor roxa suave para o texto */
         }
 
         .signup-link a {
-            color: #007BFF; /* Azul forte para o link */
+            color: #8e44ad; /* Cor roxa para o link de cadastro */
             text-decoration: none;
         }
 

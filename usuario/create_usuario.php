@@ -1,4 +1,3 @@
-<!-- create_usuario.php -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

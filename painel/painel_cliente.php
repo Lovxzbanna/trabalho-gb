@@ -23,7 +23,7 @@ if (isset($_COOKIE['usuario_email'])) {
         /* Corpo da Página */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #A3C9FF, #4A76A8);
+            background: linear-gradient(135deg, #4A76A8, #6A4C9C, #D8A6D1); /* Gradiente azul, roxo e rosa */
             color: #333;
             min-height: 100vh;
             display: flex;
@@ -32,7 +32,7 @@ if (isset($_COOKIE['usuario_email'])) {
 
         /* Estilo para o menu */
         .navbar {
-            background-color: #007BFF; /* Cor do header ajustada para azul */
+            background-color: #6A4C9C; /* Cor do header ajustada para roxo */
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
@@ -41,7 +41,7 @@ if (isset($_COOKIE['usuario_email'])) {
         }
 
         .navbar .logo {
-            font-size: 24px; /* Tamanho da logo ajustado */
+            font-size: 24px;
             color: white;
             font-weight: bold;
         }
@@ -49,7 +49,7 @@ if (isset($_COOKIE['usuario_email'])) {
         /* Barra de Pesquisa */
         .search-bar {
             flex-grow: 1;
-            max-width: 350px; /* Tamanho da barra de pesquisa */
+            max-width: 350px;
             display: flex;
             margin-left: 20px;
         }
@@ -74,7 +74,7 @@ if (isset($_COOKIE['usuario_email'])) {
         }
 
         .search-bar button:hover {
-            background-color: #B983C1; /* Cor de hover ajustada */
+            background-color: #B983C1;
         }
 
         /* Menu de Navegação */
@@ -93,7 +93,7 @@ if (isset($_COOKIE['usuario_email'])) {
         }
 
         .nav-links a:hover {
-            background-color: #0056b3; /* Cor de hover ajustada */
+            background-color: #0056b3;
         }
 
         .hamburger-menu {
@@ -116,7 +116,7 @@ if (isset($_COOKIE['usuario_email'])) {
             top: 60px;
             left: 0;
             width: 100%;
-            background-color: #007BFF;
+            background-color: #6A4C9C;
             padding: 20px;
             box-sizing: border-box;
             text-align: center;
@@ -178,7 +178,7 @@ if (isset($_COOKIE['usuario_email'])) {
 
         .profile-pic {
             border-radius: 50%;
-            width: 100px; /* Tamanho ajustado da foto de perfil */
+            width: 100px;
             height: 100px;
             margin-right: 20px;
             border: 4px solid #D8A6D1;
@@ -186,8 +186,8 @@ if (isset($_COOKIE['usuario_email'])) {
         }
 
         h2 {
-            font-size: 26px; /* Tamanho da saudação ajustado */
-            color: #007BFF;
+            font-size: 26px;
+            color: black;
         }
 
         p {
@@ -201,7 +201,7 @@ if (isset($_COOKIE['usuario_email'])) {
             border-radius: 8px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             margin-top: 40px;
-            color: #007BFF;
+            color: black;
         }
 
         .extra-container p {
@@ -243,12 +243,12 @@ if (isset($_COOKIE['usuario_email'])) {
 
         .card-title {
             font-size: 20px;
-            color: #007BFF;
+            color: black;
             margin-bottom: 10px;
         }
 
         .card-description {
-            font-size: 14px;
+            font-size: 16px;
             color: #666;
         }
     </style>
@@ -269,7 +269,7 @@ if (isset($_COOKIE['usuario_email'])) {
         <div class="nav-links">
             <a href="../header/sobre.php">Sobre</a>
             <a href="../header/contato.php">Contato</a>
-            <a href="projetos.php">Projetos</a>
+            <a href="../projeto/projetos.php">Projetos</a>
 
             <!-- Exibe Login ou perfil dependendo do estado de login -->
             <?php if (isset($_SESSION['usuario_email'])) { ?>
@@ -296,47 +296,46 @@ if (isset($_COOKIE['usuario_email'])) {
                 <div class="user-info">
                     <img src="../img/projetos/fotoperfil.png" alt="Foto de Perfil" class="profile-pic">
                     <div>
-                        <h2>Seja bem-vindo, <?= isset($_SESSION['usuario_email']) ? $_SESSION['usuario_email'] : 'Visitante'; ?>!</h2>
-                        <p>Estamos muito felizes em te ter por aqui. Vamos ajudar você a encontrar as melhores oportunidades ou freelancers para o seu projeto.</p>
+                        <h2>Seja bem-vindo, <?php echo $_SESSION['usuario_email']; ?>!</h2>
+                        <p>Conte-nos sobre o seu projeto ou procure por freelancers incríveis.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Descrição adicional -->
+            <!-- Seção Extra -->
             <div class="extra-container">
-                <p>Bem-vindo ao CemFreelas, a plataforma que conecta freelancers talentosos e clientes em busca de soluções criativas. Encontre o profissional ideal para seu projeto ou publique suas oportunidades para conquistar novos desafios. Cadastre-se agora e comece a explorar as melhores opções para seu trabalho ou projeto!</p>
+                <p>Se você tiver alguma dúvida, consulte nossa seção de ajuda ou entre em contato conosco.</p>
             </div>
-
-            <!-- Cards explicativos -->
-            <section class="how-it-work-cards">
-                <div class="how-it-work-card">
-                    <img src="../img/projetos/publiquepj.jpg" alt="Poste seu Projeto" class="card-image">
-                    <p class="card-description">Poste seu projeto e conecte-se com freelancers qualificados.</p>
-                </div>
-                <div class="how-it-work-card">
-                    <img src="../img/projetos/selecione.avif" alt="Freelancer" class="card-image">
-                    <p class="card-description">Encontre freelancers talentosos prontos para trabalhar no seu projeto.</p>
-                </div>
-                <div class="how-it-work-card">
-                    <img src="../img/projetos/obtenha.webp" alt="Contrate" class="card-image">
-                    <p class="card-description">Contrate o freelancer ideal e comece a trabalhar no seu projeto.</p>
-                </div>
-                <div class="how-it-work-card">
-                    <img src="../img/projetos/pagando.avif" alt="Imagem do Cartão" class="card-image">
-                    <p class="card-description">Nós garantimos que o pagamento seja seguro e que ambas as partes fiquem satisfeitas.</p>
-                </div>
-            </section>
         </div>
-    </main>
+             <!-- Como funciona - Cartões informativos -->
+        <section class="how-it-work-cards">
+            <div class="how-it-work-card">
+                <img src="../img/projetos/publiquepj.jpg" alt="Login" class="card-image">
+                <p class="card-description">Acesse sua conta ou cadastre-se para começar a explorar.</p>
+            </div>
+            <div class="how-it-work-card">
+                <img src="../img/projetos/selecione.avif" alt="Freelancer" class="card-image">
+                <p class="card-description">Encontre freelancers talentosos prontos para trabalhar no seu projeto.</p>
+            </div>
+            <div class="how-it-work-card">
+                <img src="../img/projetos/obtenha.webp" alt="Contrate" class="card-image">
+                <p class="card-description">Contrate o freelancer ideal e comece a trabalhar no seu projeto.</p>
+            </div>
+            <div class="how-it-work-card">
+                <img src="../img/projetos/pagando.avif" alt="Pagamento" class="card-image">
+                <p class="card-description">Nós garantimos que o pagamento seja seguro e que ambas as partes fiquem satisfeitas.</p>
+            </div>
+        </section>
+    </div>
+
+</main>
 
     <script>
+        // Função para alternar o menu em dispositivos móveis
         function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
         }
     </script>
+    <?php include '../header/footer.php'?>
 </body>
-<!-- Inclusão do footer com caminho absoluto -->
-<?php include_once '../header/footer.php'; ?>
-
 </html>

@@ -1,24 +1,3 @@
-<?php include '../header/header.php'; // Incluindo o cabeçalho do site ?>
-
-<?php
-// Processar o formulário quando for enviado
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $database = new Database();
-    $db = $database->getConnection();
-
-    $mensagem = new Mensagem($db);
-    $mensagem->nome = htmlspecialchars($_POST['nome']); // Proteção contra injeção de HTML
-    $mensagem->email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL); // Sanitização do e-mail
-    $mensagem->mensagem = htmlspecialchars($_POST['mensagem']); // Proteção contra injeção de HTML
-
-    if ($mensagem->salvarMensagem()) {
-        echo "<p>Mensagem enviada com sucesso! Obrigado por entrar em contato.</p>";
-    } else {
-        echo "<p>Houve um erro ao enviar sua mensagem. Por favor, tente novamente.</p>";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -35,13 +14,133 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f7fb; /* Cor de fundo clara */
+            background: linear-gradient(135deg, #4A76A8, #D8A6D1); /* Gradiente rosa e roxo */
             color: #333;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
             align-items: center; /* Centraliza a página */
             min-height: 100vh;
+        }
+
+        /* Header */
+        header.navbar {
+            width: 100%; /* Ocupa toda a largura da tela */
+            background-color: #6A4C9C; /* Cor roxa */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px; /* Adiciona espaçamento nas laterais */
+            position: fixed; /* Fixa o cabeçalho no topo */
+            top: 0; /* Fixa no topo */
+            left: 0; /* Fixa na borda esquerda */
+            z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        header.navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff; /* Cor branca para o logo */
+            text-decoration: none;
+        }
+
+        header.navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        header.navbar .nav-links a {
+            color: #fff; /* Cor branca para os links */
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        header.navbar .nav-links a:hover {
+            color: #D8A6D1; /* Cor laranja ao passar o mouse */
+        }
+
+        /* Barra de pesquisa */
+        header .search-bar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        header .search-bar input[type="text"] {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            width: 200px;
+            transition: border-color 0.3s ease;
+        }
+
+        header .search-bar input[type="text"]:focus {
+            border-color: #FF7F50; /* Laranja */
+        }
+
+        header .search-bar button {
+            padding: 8px 12px;
+            background-color: #FFB6C1; /* Rosa claro */
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+        }
+
+        header .search-bar button:hover {
+            background-color: #FF7F50; /* Laranja */
+        }
+
+        /* Menu hamburguer (responsivo) */
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger-menu div {
+            width: 25px;
+            height: 3px;
+            background-color: #fff; /* Cor branca para as linhas do hamburguer */
+        }
+
+        /* Responsividade: exibe o menu hamburguer em telas menores */
+        @media (max-width: 768px) {
+            header.navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header.navbar .nav-links {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+
+            /* Exibe o menu de navegação em telas menores quando a classe 'active' for adicionada */
+            .nav-links.active {
+                display: block;
+            }
+
+            .nav-links {
+                display: none; /* Esconde o menu inicialmente */
+                width: 100%;
+                padding-left: 20px;
+            }
+        }
+
+        /* Resetando estilos para o corpo da página */
+        body {
+            padding-top: 80px; /* Espaço para o cabeçalho fixo */
         }
 
         /* Container principal */
@@ -98,9 +197,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         button {
             padding: 12px 20px;
-            background-color: #FF7F50; /* Laranja */
+            background-color: pink ; /* Laranja */
             width: 50%;
-            color: white;
+            color: black;
             border: none;
             border-radius: 6px;
             font-size: 16px;
@@ -109,7 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         button:hover {
-            background-color: #E75A28; /* Laranja escuro */
+            background-color: purple ; /* Laranja escuro */
         }
 
         /* Estilos para os links */
@@ -166,46 +265,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
+<!-- Conteúdo principal -->
+<div class="container">
+    <h1>Entre em contato conosco</h1>
 
-    <div class="container">
-        <!-- Título -->
-        <h1>Fale Conosco</h1>
+    <form action="enviar_mensagem.php" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-        <!-- Formulário de Contato -->
-        <form method="POST" action="fale_conosco.php">
-            <label for="nome">Seu Nome</label>
-            <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
 
-            <label for="email">Seu E-mail</label>
-            <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" name="mensagem" required></textarea>
 
-            <label for="mensagem">Mensagem</label>
-            <textarea id="mensagem" name="mensagem" required placeholder="Escreva sua mensagem aqui..."></textarea>
+        <button type="submit">Enviar Mensagem</button>
+    </form>
 
-            <button type="submit">Enviar Mensagem</button>
-        </form>
-
-        <!-- Informações de Contato -->
-        <div class="contact-info">
-            <h2>Informações de Contato</h2>
-            <p><strong>Telefone:</strong> (11) 1234-5678</p>
-            <p><strong>E-mail:</strong> <a href="mailto:contato@cemfreelas.com.br">contato@cemfreelas.com.br</a></p>
-        </div>
-
-        <!-- Redes Sociais -->
-        <div class="social-links">
-            <h2>Siga-nos nas Redes Sociais</h2>
-            <ul>
-                <li><a href="https://facebook.com/cemfreelas" target="_blank">Facebook: facebook.com/cemfreelas</a></li>
-                <li><a href="https://instagram.com/cemfreelas" target="_blank">Instagram: @cemfreelas</a></li>
-                <li><a href="https://twitter.com/cemfreelas" target="_blank">Twitter: @cemfreelas</a></li>
-                <li><a href="https://linkedin.com/company/cemfreelas" target="_blank">LinkedIn: linkedin.com/company/cemfreelas</a></li>
-            </ul>
-        </div>
+    <div class="contact-info">
+        <p>Você também pode nos encontrar em:</p>
+        <p>Email: contato@cemfreelas.com</p>
+        <p>Telefone: (11) 99999-9999</p>
     </div>
 
-    <!-- Rodapé -->
-    <?php include '../header/footer.php'; ?>
+    <div class="social-links">
+        <p>Redes sociais:</p>
+        <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </div>
+</div>
 
+<script>
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('active');
+    }
+</script>
+<?php include '../header/header.php' ?>
 </body>
 </html>

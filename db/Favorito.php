@@ -1,5 +1,6 @@
 <?php
 
+// db/Favorito.php
 class Favorito {
     private $conn;
     private $table = 'favoritos';
@@ -15,4 +16,5 @@ class Favorito {
         return $stmt->fetchColumn() > 0;
     }
 }
+
 ?>

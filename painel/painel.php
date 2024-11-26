@@ -32,11 +32,6 @@ if (isset($_SESSION['usuario_email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel - CemFreelas</title>
     <style>
-        /* Seu código CSS aqui */
-    </style>
-</head>
-<body>
-    <style>
         /* Resetando estilos */
         * {
             margin: 0;
@@ -87,12 +82,12 @@ if (isset($_SESSION['usuario_email'])) {
 
         h2 {
             font-size: 26px;
-            color: #6A4C9C;
+            color: black;
         }
 
         p {
             font-size: 18px;
-            color: #333;
+            color: black ;
         }
 
         /* Cartões informativos */
@@ -129,7 +124,7 @@ if (isset($_SESSION['usuario_email'])) {
 
         .card-title {
             font-size: 20px;
-            color: #6A4C9C;
+            color: black;
             margin-bottom: 10px;
         }
 
@@ -145,54 +140,12 @@ if (isset($_SESSION['usuario_email'])) {
             border-radius: 8px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             margin-top: 40px;
-            color: #6A4C9C;
+            color: black ;
         }
 
         .extra-container p {
             font-size: 16px;
             color: #555;
-        }
-
-        /* Estilos de Navegação */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #6A4C9C;
-            padding: 20px;
-            color: white;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .search-bar input {
-            padding: 8px;
-            margin-right: 10px;
-            border: none;
-            border-radius: 5px;
-            width: 200px;
-        }
-
-        .search-bar button {
-            padding: 8px 16px;
-            background-color: #D8A6D1;
-            border: none;
-            border-radius: 5px;
-            color: white;
-        }
-
-        .nav-links a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-        }
-
-        .nav-links a:hover {
-            color: #D8A6D1;
         }
 
         /* Responsividade */
@@ -255,44 +208,11 @@ if (isset($_SESSION['usuario_email'])) {
         footer a:hover {
             color: #fff;
         }
-</style>
- <!-- Navbar -->
- <header class="navbar">
-        <div class="logo">CemFreelas</div>
-
-        <!-- Barra de Pesquisa -->
-        <form action="../login/pesquisar.php" method="GET" class="search-bar">
-            <input type="text" name="query" placeholder="Pesquisar...">
-            <button type="submit">Pesquisar</button>
-        </form>
-
-        <!-- Menu de Navegação -->
-        <div class="nav-links">
-            <a href="../header/sobre.php">Sobre</a>
-            <a href="../header/contato.php">Contato</a>
-
-            <?php if (isset($_SESSION['usuario_email'])) { ?>
-                <!-- Exibe as opções quando o usuário está logado -->
-                <a href="../perfil/perfil.php">Perfil</a>
-                <a href="../projeto/meus_projetos.php">Meus Projetos</a>
-                <a href="../projeto/postar_projeto.php">Postar Projeto</a>
-                <a href="../header/logout.php">Logout</a>
-            <?php } else { ?>
-                <!-- Exibe a opção de login quando o usuário não está logado -->
-                <a href="../login/login.php">Login</a>
-                <!-- Exibe "Bem-vindo, Visitante!" caso o usuário não esteja logado -->
-                <span>Bem-vindo, Visitante!</span>
-            <?php } ?>
-        </div>
-
-        <!-- Hamburger Menu -->
-        <div class="hamburger-menu" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </header>
-
+    </style>
+</head>
+<body>
+ <!-- Rodapé -->
+ <?php include '../header/header.php'; ?>
 <main class="main-content">
     <div class="container">
         <!-- Seção de boas-vindas -->

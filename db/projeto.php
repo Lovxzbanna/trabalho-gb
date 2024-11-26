@@ -1,24 +1,30 @@
 <?php
+// db/Projeto.php
+
 class Projeto {
     private $conn;
+    private $table = 'projetos';
 
-    public function __construct($conn) {
-        $this->conn = $conn;
+    public function __construct($db) {
+        $this->conn = $db;
     }
 
-    // Método para buscar projetos com base em um termo
-    public function buscarProjetos($query) {
-        // SQL para buscar projetos pelo nome ou descrição
-        $sql = "SELECT * FROM projetos WHERE nome_produto LIKE :query OR descricao LIKE :query";
-        $stmt = $this->conn->prepare($sql);
+    public function buscarProjetos($search = '') {
+        $query = "SELECT * FROM " . $this->table;
+        if ($search) {
+            $query .= " WHERE nome_produto LIKE ?";
+        }
 
-        // Definir o parâmetro para a busca, utilizando % para buscar em qualquer parte do nome/descrição
-        $searchQuery = "%".$query."%";
-        $stmt->bindParam(':query', $searchQuery);
-        $stmt->execute();
+        $stmt = $this->conn->prepare($query);
+        if ($search) {
+            $searchTerm = '%' . $search . '%';
+            $stmt->execute([$searchTerm]);
+        } else {
+            $stmt->execute();
+        }
 
-        // Retornar os resultados encontrados
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
+
 ?>

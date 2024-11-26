@@ -123,7 +123,7 @@ button:hover {
 </style>
     <div class="container">
         <h2>Criar Usuário</h2>
-        <form action="create_usuario.php" method="POST">
+        <form action="../login/criar_usuario.php" method="POST">
             <label for="nome">Nome</label>
             <input type="text" id="nome" name="nome" required>
 
