@@ -9,9 +9,8 @@ require_once 'header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre nós - CemFreelas</title>
-    <link rel="stylesheet" href="style.css"> <!-- Certifique-se de que o caminho está correto -->
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Estilos que você já forneceu */
         /* Reset de estilos padrões */
         * {
             margin: 0;
@@ -22,47 +21,47 @@ require_once 'header.php';
         /* Corpo da Página */
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #4a6fa5, #a8d0e6);
+            background: linear-gradient(135deg, #2E3192, #1BFFFF, #9B6EAE); /* Azul, Ciano e Roxo */
             color: #333;
             padding: 0;
             min-height: 100vh;
         }
 
-        /* Estilo para o container principal */
+        /* Container principal */
         .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
+            width: 85%;
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 30px;
             background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         /* Títulos */
         h2, h3, h4 {
-            color: #4a6fa5;
-            margin-bottom: 15px;
+            color: #9B6EAE;
+            margin-bottom: 20px;
             font-weight: bold;
         }
 
         h2 {
-            font-size: 28px;
+            font-size: 32px;
         }
 
         h3 {
-            font-size: 24px;
+            font-size: 28px;
         }
 
         h4 {
-            font-size: 20px;
+            font-size: 22px;
         }
 
         /* Parágrafos */
         p {
             font-size: 18px;
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         /* Listas */
@@ -73,13 +72,13 @@ require_once 'header.php';
 
         ul li {
             font-size: 16px;
-            line-height: 1.5;
+            line-height: 1.6;
             margin-bottom: 10px;
         }
 
         /* Estilo para links */
         a {
-            color: #FF4D94;
+            color: #FF5D8F;
             text-decoration: none;
             font-weight: 500;
         }
@@ -108,7 +107,7 @@ require_once 'header.php';
         }
 
         .social-links ul li a {
-            color: #FF4D94;
+            color: #FF5D8F;
             text-decoration: none;
             font-weight: 500;
         }
@@ -117,33 +116,28 @@ require_once 'header.php';
             text-decoration: underline;
         }
 
-        /* Adicionando uma borda ao redor de algumas seções */
-        ul, p, ol {
-            margin-top: 20px;
-        }
-
         /* Estilo do Footer */
         footer {
-            background-color: #4a6fa5;
+            background-color: #9B6EAE;
             color: white;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
-            margin-top: 40px;
-            border-radius: 0 0 10px 10px;
+            margin-top: 50px;
+            border-radius: 0 0 15px 15px;
         }
 
         /* Estilos responsivos */
         @media (max-width: 768px) {
             h2 {
-                font-size: 24px;
+                font-size: 28px;
             }
 
             h3 {
-                font-size: 22px;
+                font-size: 24px;
             }
 
             h4 {
-                font-size: 18px;
+                font-size: 20px;
             }
 
             p {
@@ -153,12 +147,12 @@ require_once 'header.php';
             ul li {
                 font-size: 14px;
             }
-                    }
-        
+        }
     </style>
 </head>
 <body>
-<div> <h2>Bem-vindo ao CemFreelas: A Plataforma Perfeita para Freelancers e Clientes!</h2>
+    <div class="container">
+        <h2>Bem-vindo ao CemFreelas: A Plataforma Perfeita para Freelancers e Clientes!</h2>
         <p>O <strong>CemFreelas</strong> é um site inovador que conecta freelancers e clientes, proporcionando um ambiente dinâmico onde projetos podem ser propostos, contratados e avaliados de forma simples e segura. Se você é freelancer e busca novos desafios, ou se você é cliente em busca de profissionais para realizar seus projetos, o CemFreelas é o lugar certo para você!</p>
 
         <p>Nosso sistema é estruturado para atender a diferentes tipos de usuários, com funcionalidades voltadas para facilitar a criação de projetos, comunicação entre as partes e uma avaliação transparente das experiências. Abaixo, explicamos como o site funciona para cada tipo de usuário.</p>
@@ -220,11 +214,9 @@ require_once 'header.php';
                 <li><a href="https://www.twitter.com/cemfreelas" target="_blank">Twitter</a></li>
             </ul>
         </div>
-        
-
-        <footer>
-            <p>&copy; 2024 CemFreelas - Todos os direitos reservados</p>
-        </footer>
     </div>
 </body>
+<footer>
+    <p>&copy; 2024 CemFreelas - Todos os direitos reservados</p>
+</footer>
 </html>

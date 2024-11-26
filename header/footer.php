@@ -1,19 +1,20 @@
 <footer>
     <p>&copy; 2024 Trabalho final. Feito por: Anna.</p>
 </footer>
+
 <style>
     footer {
-        background: linear-gradient(90deg, #4a6fa5);
-        color: black;
+        background: transparent;
+        color: white;
         padding: 20px;
         text-align: center;
     }
 
     footer a {
-        background: linear-gradient(to bottom, #ff8da2, #ff4d94);
+        background: linear-gradient(135deg, #4A76A8, #A3C9FF); /* Gradiente azul */
         text-decoration: none;
         margin: 0 10px;
-        color: pink;
+        background: linear-gradient(135deg, #4A76A8, #A3C9FF); /* Gradiente azul */
     }
 
     footer a:hover {

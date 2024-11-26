@@ -9,7 +9,8 @@
         /* Estilos customizados */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
+            background-color: #f4f7fc; /* Cor de fundo mais clara */
+            color: #333; /* Texto escuro */
         }
         .container {
             max-width: 600px;
@@ -24,14 +25,48 @@
         .form-container h2 {
             margin-bottom: 20px;
             text-align: center;
+            color: #3b3f47; /* Cor escura para o título */
         }
         .button.is-primary {
             width: 100%;
-            background-color: #ff4d94;
+            background-color: #FF7F50; /* Cor laranja */
             color: white;
+            border-radius: 8px; /* Bordas arredondadas */
+            transition: background-color 0.3s ease;
+        }
+        .button.is-primary:hover {
+            background-color: #E75A28; /* Tom de laranja mais escuro no hover */
+        }
+        .notification.is-success {
+            background-color: #E7F7E2;
+            color: #28A745; /* Cor verde para sucesso */
+            border-left: 5px solid #28A745;
+        }
+        .notification.is-danger {
+            background-color: #F8D7DA;
+            color: #DC3545; /* Cor vermelha para erro */
+            border-left: 5px solid #DC3545;
         }
         .notification {
             margin-top: 20px;
+            border-radius: 6px;
+        }
+        .field label {
+            font-weight: bold;
+            color: #333;
+        }
+        .input, .textarea {
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            background-color: #F9F9F9; /* Fundo claro nos campos */
+            transition: border 0.3s ease;
+        }
+        .input:focus, .textarea:focus {
+            border-color: #FF7F50; /* Laranja nos campos focados */
+            outline: none;
         }
     </style>
 </head>
@@ -44,19 +79,18 @@
         
         <!-- Verificar o status da mensagem -->
         <?php if (isset($_GET['status'])): ?>
-    <?php if ($_GET['status'] === 'success'): ?>
-        <div class="notification is-success">
-            <strong>Mensagem enviada com sucesso!</strong> 
-            Agradecemos pelo seu contato. Responderemos em breve.
-        </div>
-    <?php elseif ($_GET['status'] === 'error'): ?>
-        <div class="notification is-danger">
-            <strong>Ocorreu um erro!</strong> 
-            Não conseguimos enviar sua mensagem. Por favor, tente novamente.
-        </div>
-    <?php endif; ?>
-<?php endif; ?>
-
+            <?php if ($_GET['status'] === 'success'): ?>
+                <div class="notification is-success">
+                    <strong>Mensagem enviada com sucesso!</strong> 
+                    Agradecemos pelo seu contato. Responderemos em breve.
+                </div>
+            <?php elseif ($_GET['status'] === 'error'): ?>
+                <div class="notification is-danger">
+                    <strong>Ocorreu um erro!</strong> 
+                    Não conseguimos enviar sua mensagem. Por favor, tente novamente.
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
 
         <!-- Formulário de Contato -->
         <form action="processar_mensagem.php" method="POST">

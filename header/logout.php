@@ -5,18 +5,31 @@ require_once '../db/Usuario.php';
 // Iniciar a sessão
 session_start();
 
-// Conectar ao banco de dados com PDO (se necessário)
-$pdo = new PDO('mysql:host=localhost;dbname=login', 'root', '');
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// Conectar ao banco de dados com PDO
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=login', 'root', '');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Erro ao conectar ao banco de dados: " . $e->getMessage());
+}
 
-// Criar o objeto Usuario
+// Criar o objeto Usuario (caso necessário)
 $usuario = new Usuario($pdo);
 
-// Fazer logout: destruir as variáveis de sessão
-session_unset(); // Limpa todas as variáveis de sessão
-session_destroy(); // Destrói a sessão
+// Verificar se o usuário está logado
+if (isset($_SESSION['usuario_email'])) {
+    // Destruir as variáveis de sessão e a sessão em si
+    session_unset();  // Limpa todas as variáveis de sessão
+    session_destroy();  // Destroi a sessão
 
-// Redirecionar para a página de login (ou painel)
-header("Location: ../painel/painel.php");
+    // Definir uma mensagem de sucesso (opcional, você pode personalizar isso)
+    $_SESSION['logout_message'] = "Você foi desconectado com sucesso.";
+} else {
+    // Caso o usuário não esteja logado, redireciona diretamente (ou exibe uma mensagem de erro)
+    $_SESSION['logout_message'] = "Você não está logado.";
+}
+
+// Redirecionar para a página de login ou painel
+header("Location: ../login/login.php");  // Alterar para a página de login
 exit();
 ?>

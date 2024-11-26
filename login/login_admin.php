@@ -132,3 +132,177 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </body>
 </html>
+<?php
+session_start();
+
+// Verifica se o usuário está logado e se tem o papel de admin
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: login.php");
+    exit;
+}
+
+// Conectar ao banco de dados e buscar os usuários
+include '../db/DB.php';
+$db = new DB();
+$conn = $db->connect();
+$query = "SELECT usuario_id, nome, email, role FROM usuarios";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+
+$usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Usuários</title>
+    <style>
+        /* Estilos básicos */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            background-color: #f0f0f0;
+        }
+
+        /* Estilo para o cabeçalho */
+        header {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        header .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            font-size: 16px;
+        }
+
+        header .nav a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+
+        /* Estilo da sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            padding-top: 20px;
+            position: fixed;
+            top: 50px;
+            left: 0;
+            height: 100%;
+            color: white;
+            padding-left: 10px;
+        }
+
+        .sidebar h2 {
+            color: #fff;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+
+        /* Estilo do conteúdo */
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+            margin-top: 60px; /* Para ajustar a altura do header fixo */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho com aba Login -->
+    <header>
+        <div class="nav">
+            <div>
+                <a href="painel_admin.php">Painel Admin</a>
+                <a href="gerenciar_usuarios.php">Gerenciar Usuários</a>
+                <a href="relatorios.php">Relatórios</a>
+                <a href="configuracoes.php">Configurações</a>
+            </div>
+            <div>
+                <a href="logout.php">Sair</a>
+                <a href="login.php">Login</a> <!-- Aba de login -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Painel Admin</h2>
+        <a href="painel_admin.php">Dashboard</a>
+        <a href="gerenciar_usuarios.php">Gerenciar Usuários</a>
+        <a href="relatorios.php">Relatórios</a>
+        <a href="configuracoes.php">Configurações</a>
+        <a href="logout.php">Sair</a>
+    </div>
+
+    <!-- Conteúdo -->
+    <div class="content">
+        <h1>Gerenciar Usuários</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($usuarios as $usuario): ?>
+                <tr>
+                    <td><?php echo $usuario['usuario_id']; ?></td>
+                    <td><?php echo $usuario['nome']; ?></td>
+                    <td><?php echo $usuario['email']; ?></td>
+                    <td><?php echo $usuario['role']; ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

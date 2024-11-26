@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -18,23 +16,24 @@ session_start();
         /* Corpo da Página */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #A3C9FF, #4A76A8);
+            background: linear-gradient(135deg, #A3D9F7, #4A76A8); /* Gradiente azul claro e escuro */
             color: #333;
             min-height: 100vh;
         }
 
         /* Estilo para o menu */
         .navbar {
-            background-color: #6A4C9C;
-            padding: 10px 20px;
+            background: linear-gradient(135deg, #4A76A8, #A3C9FF); /* Gradiente azul */
+            padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .navbar .logo {
-            font-size: 24px;
+            font-size: 28px;
             color: white;
             font-weight: bold;
         }
@@ -49,20 +48,26 @@ session_start();
 
         .search-bar input {
             width: 100%;
-            padding: 8px;
-            border-radius: 20px;
-            border: none;
+            padding: 10px;
+            border-radius: 25px;
+            border: 2px solid #A3D9A5; /* Verde claro */
             outline: none;
             font-size: 16px;
+            background-color: #f9f9f9;
         }
 
         .search-bar button {
-            padding: 8px 12px;
-            background-color: #D8A6D1;
+            padding: 10px 15px;
+            background-color: #4C8C6B; /* Verde escuro */
             color: white;
-            border-radius: 20px;
+            border-radius: 25px;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #39765C; /* Verde ainda mais escuro */
         }
 
         /* Menu de Navegação */
@@ -75,6 +80,11 @@ session_start();
             color: white;
             text-decoration: none;
             font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #A3D9A5; /* Verde claro para hover */
         }
 
         .nav-links span {
@@ -102,7 +112,7 @@ session_start();
             top: 60px;
             left: 0;
             width: 100%;
-            background-color: #6A4C9C;
+            background-color: #4C8C6B; /* Verde escuro */
             padding: 20px;
             box-sizing: border-box;
             text-align: center;
@@ -111,7 +121,7 @@ session_start();
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                    width: 100%;
+                width: 100%;
             }
 
             .hamburger-menu {
@@ -124,7 +134,7 @@ session_start();
             }
 
             .search-bar {
-                margin-top: 10px;
+                margin-top: 15px;
                 width: 100%;
                 margin-left: 0;
             }
@@ -155,7 +165,6 @@ session_start();
             <?php if (isset($_SESSION['usuario_email'])) { ?>
                 <!-- Exibe as opções quando o usuário está logado -->
                 <a href="../perfil/perfil.php">Perfil</a>
-                <a href="../header/cadastro_admin.php">Cadastro do Administrador</a>
                 <a href="../projeto/meus_projetos.php">Meus Projetos</a>
                 <a href="../projeto/postar_projeto.php">Postar Projeto</a>
                 <a href="../header/logout.php">Logout</a>

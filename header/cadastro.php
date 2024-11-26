@@ -1,205 +1,146 @@
-<?php
-session_start();
-include '../db/DB.php'; // Classe DB para conexão com o banco de dados
-
-// Variável para armazenar erros
-$erro = '';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
-    $senha_confirm = $_POST['senha_confirm'];
-    $tipo_usuario = $_POST['tipo_usuario'];
-    $data_nascimento = $_POST['data_nascimento'];
-
-    // Validar se os campos estão preenchidos
-    if (empty($nome) || empty($email) || empty($senha) || empty($senha_confirm) || empty($tipo_usuario) || empty($data_nascimento)) {
-        $erro = "Todos os campos são obrigatórios!";
-    } elseif ($senha !== $senha_confirm) {
-        $erro = "As senhas não coincidem!";
-    } else {
-        // Conectar ao banco de dados
-        $DB = new DB();
-        $conn = $DB->getConnection();
-
-        if ($conn === null) {
-            $erro = "Erro ao conectar ao banco de dados.";
-        } else {
-            // Verificar se o e-mail já está cadastrado
-            $query = "SELECT * FROM usuarios WHERE email = :email";
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
-
-            if ($stmt->rowCount() > 0) {
-                $erro = "E-mail já cadastrado!";
-            } else {
-                // Inserir novo usuário no banco de dados
-                $query = "INSERT INTO usuarios (nome, email, senha, tipo_usuario, data_nascimento) VALUES (:nome, :email, :senha, :tipo_usuario, :data_nascimento)";
-                $stmt = $conn->prepare($query);
-                $stmt->bindParam(':nome', $nome);
-                $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':senha', $senha); // Senha em texto simples
-                $stmt->bindParam(':tipo_usuario', $tipo_usuario);
-                $stmt->bindParam(':data_nascimento', $data_nascimento);
-
-                if ($stmt->execute()) {
-                    // Armazenar as informações na sessão
-                    $_SESSION['usuario_email'] = $email;
-                    $_SESSION['usuario_id'] = $conn->lastInsertId();
-
-                    // Redirecionar para o painel de acordo com o tipo de usuário
-                    if ($tipo_usuario == 'cliente') {
-                        header("Location: painel_cliente.php");
-                    } elseif ($tipo_usuario == 'freelancer') {
-                        header("Location: painel_freelancer.php");
-                    }
-                    exit();
-                } else {
-                    $erro = "Erro ao cadastrar, tente novamente!";
-                }
-            }
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro</title>
-    <style>
-        /* Estilo básico da página */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #A3C8FF, #C7E8FF); /* Gradiente suave de azul claro */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        /* Container do formulário de cadastro */
-        .form-container {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        /* Título do formulário */
-        h2 {
-            font-size: 28px;
-            color: #007BFF; /* Azul forte */
-            margin-bottom: 20px;
-        }
-
-        /* Estilo dos campos de entrada */
-        .input-field {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            margin-bottom: 15px;
-            background-color: #f9f9f9;
-            color: #333;
-            transition: border-color 0.3s;
-        }
-
-        .input-field:focus {
-            border-color: #007BFF; /* Foco na borda com cor azul */
-            outline: none;
-        }
-
-        /* Estilo do select (tipo de usuário) */
-        .select-field {
-            width: 100%;
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            margin-bottom: 15px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-
-        /* Botão de envio */
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #007BFF; /* Azul forte */
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .submit-btn:hover {
-            background-color: #0056b3; /* Cor mais forte no hover */
-            transform: scale(1.05); /* Efeito de aumentar o botão */
-        }
-
-        /* Mensagem de erro */
-        .error {
-            color: red;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        /* Link para o login */
-        .login-link {
-            margin-top: 20px;
-            color: #6c757d; /* Cor suave para o texto */
-        }
-
-        .login-link a {
-            color: #007BFF; /* Azul forte para o link */
-            text-decoration: none;
-        }
-
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Usuário</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<style>
+/* Resetando estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <div class="form-container">
-        <h2>Cadastro</h2>
+/* Definindo o fundo com gradiente de azul, roxo e rosa */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #2196F3, #6a1b9a, #D81B60); /* Gradiente de azul, roxo e rosa */
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        <!-- Exibindo a mensagem de erro, se houver -->
-        <?php if (!empty($erro)): ?>
-            <p class="error"><?php echo $erro; ?></p>
-        <?php endif; ?>
+/* Estilo do container principal */
+.container {
+    width: 50%;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-        <!-- Formulário de cadastro -->
-        <form method="POST" action="cadastro.php">
-            <input type="text" name="nome" placeholder="Nome" class="input-field" required><br>
-            <input type="email" name="email" placeholder="E-mail" class="input-field" required><br>
-            <input type="password" name="senha" placeholder="Senha" class="input-field" required><br>
-            <input type="password" name="senha_confirm" placeholder="Confirmar Senha" class="input-field" required><br>
-            <select name="tipo_usuario" class="select-field" required>
-                <option value="freelancer">Freelancer</option>
+/* Título */
+h2 {
+    color: #6a1b9a; /* Roxo */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilo do formulário */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Estilos para os campos do formulário */
+label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Input text e email */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+select:focus {
+    border-color: #2196F3; /* Azul claro */
+    background-color: #ffffff;
+}
+
+/* Estilo do botão */
+button {
+    padding: 12px 20px;
+    background-color: #D81B60; /* Rosa */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #C2185B; /* Rosa escuro */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .container {
+        width: 80%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px 18px;
+    }
+}
+
+</style>
+    <div class="container">
+        <h2>Criar Usuário</h2>
+        <form action="create_usuario.php" method="POST">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" name="senha" required>
+
+            <label for="tipo">Tipo</label>
+            <select name="tipo" id="tipo" required>
                 <option value="cliente">Cliente</option>
-            </select><br>
-            <input type="date" name="data_nascimento" class="input-field" required><br>
-            <button type="submit" class="submit-btn">Cadastrar</button>
+                <option value="freelancer">Freelancer</option>
+            </select>
+
+            <button type="submit">Criar</button>
         </form>
-
-        <!-- Link para o login -->
-        <p class="login-link">
-            Já tem uma conta? <a href="../login/login.php">Faça login</a>
-        </p>
     </div>
-
 </body>
 </html>

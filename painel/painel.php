@@ -1,5 +1,4 @@
 <?php 
-
 // Inclusão dos arquivos de conexão e de usuário
 require_once '../db/DB.php';
 require_once '../db/Usuario.php';
@@ -33,7 +32,12 @@ if (isset($_SESSION['usuario_email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel - CemFreelas</title>
     <style>
-        /* CSS mantido exatamente como você forneceu */
+        /* Seu código CSS aqui */
+    </style>
+</head>
+<body>
+    <style>
+        /* Resetando estilos */
         * {
             margin: 0;
             padding: 0;
@@ -43,11 +47,13 @@ if (isset($_SESSION['usuario_email'])) {
         /* Corpo da Página */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #A3C9FF, #4A76A8);
+            background: linear-gradient(135deg, #4A76A8, #6A4C9C, #D8A6D1); /* Gradiente azul, roxo e rosa */
             color: #333;
             min-height: 100vh;
+            line-height: 1.6;
         }
 
+        /* Layout principal */
         .main-content {
             padding: 40px 20px;
         }
@@ -57,6 +63,7 @@ if (isset($_SESSION['usuario_email'])) {
             margin: 0 auto;
         }
 
+        /* Seção de boas-vindas */
         .welcome-section {
             display: flex;
             justify-content: space-between;
@@ -88,6 +95,7 @@ if (isset($_SESSION['usuario_email'])) {
             color: #333;
         }
 
+        /* Cartões informativos */
         .how-it-work-cards {
             display: flex;
             justify-content: space-between;
@@ -104,6 +112,7 @@ if (isset($_SESSION['usuario_email'])) {
             border-radius: 8px;
             transition: transform 0.3s ease;
             text-align: center;
+            overflow: hidden;
         }
 
         .how-it-work-card:hover {
@@ -129,6 +138,7 @@ if (isset($_SESSION['usuario_email'])) {
             color: #666;
         }
 
+        /* Container adicional de boas-vindas */
         .extra-container {
             background-color: #fff;
             padding: 20px;
@@ -143,6 +153,49 @@ if (isset($_SESSION['usuario_email'])) {
             color: #555;
         }
 
+        /* Estilos de Navegação */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #6A4C9C;
+            padding: 20px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .search-bar input {
+            padding: 8px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            padding: 8px 16px;
+            background-color: #D8A6D1;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        .nav-links a:hover {
+            color: #D8A6D1;
+        }
+
+        /* Responsividade */
         @media (max-width: 768px) {
             .how-it-work-cards {
                 flex-direction: column;
@@ -163,32 +216,103 @@ if (isset($_SESSION['usuario_email'])) {
                 width: 100%;
                 background-color: #D8A6D1;
                 padding: 10px 0;
+                position: absolute;
+                top: 60px;
+                left: 0;
             }
 
             .nav-links.active {
                 display: block;
             }
+
+            .hamburger-menu div {
+                width: 30px;
+                height: 4px;
+                background-color: white;
+                margin: 5px 0;
+            }
+
+            .hamburger-menu {
+                cursor: pointer;
+                display: none;
+            }
         }
-    </style>
-</head>
-<body>
-<?php include '../header/header.php' ?>
+
+        /* Rodapé */
+        footer {
+            background-color: #6A4C9C;
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        footer a {
+            color: #D8A6D1;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+</style>
+ <!-- Navbar -->
+ <header class="navbar">
+        <div class="logo">CemFreelas</div>
+
+        <!-- Barra de Pesquisa -->
+        <form action="../login/pesquisar.php" method="GET" class="search-bar">
+            <input type="text" name="query" placeholder="Pesquisar...">
+            <button type="submit">Pesquisar</button>
+        </form>
+
+        <!-- Menu de Navegação -->
+        <div class="nav-links">
+            <a href="../header/sobre.php">Sobre</a>
+            <a href="../header/contato.php">Contato</a>
+
+            <?php if (isset($_SESSION['usuario_email'])) { ?>
+                <!-- Exibe as opções quando o usuário está logado -->
+                <a href="../perfil/perfil.php">Perfil</a>
+                <a href="../projeto/meus_projetos.php">Meus Projetos</a>
+                <a href="../projeto/postar_projeto.php">Postar Projeto</a>
+                <a href="../header/logout.php">Logout</a>
+            <?php } else { ?>
+                <!-- Exibe a opção de login quando o usuário não está logado -->
+                <a href="../login/login.php">Login</a>
+                <!-- Exibe "Bem-vindo, Visitante!" caso o usuário não esteja logado -->
+                <span>Bem-vindo, Visitante!</span>
+            <?php } ?>
+        </div>
+
+        <!-- Hamburger Menu -->
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+
 <main class="main-content">
     <div class="container">
+        <!-- Seção de boas-vindas -->
         <section class="welcome-section">
             <div class="user-info">
                 <img src="<?php echo htmlspecialchars($foto_perfil); ?>" alt="Foto de Perfil" class="profile-pic">
                 <div>
-                    <h2>Seja bem-vindo, <?php echo htmlspecialchars($nome_usuario); ?>!</h2>
+                    <!-- Verifique se $nome_usuario não é null antes de usá-lo -->
+                    <h2>Seja bem-vindo, <?php echo htmlspecialchars($nome_usuario ? $nome_usuario : 'Visitante'); ?>!</h2>
                     <p>Estamos muito felizes em te ter por aqui. Vamos ajudar você a encontrar as melhores oportunidades ou freelancers para o seu projeto.</p>
                 </div>
             </div>
         </section>
 
+        <!-- Container de boas-vindas adicional -->
         <div class="extra-container">
             <p>Bem-vindo ao CemFreelas, a plataforma que conecta freelancers talentosos e clientes em busca de soluções criativas. Encontre o profissional ideal para seu projeto ou publique suas oportunidades para conquistar novos desafios. Cadastre-se agora e comece a explorar as melhores opções para seu trabalho ou projeto!</p>
         </div>
 
+        <!-- Como funciona - Cartões informativos -->
         <section class="how-it-work-cards">
             <div class="how-it-work-card">
                 <img src="../img/projetos/publiquepj.jpg" alt="Login" class="card-image">
@@ -209,7 +333,16 @@ if (isset($_SESSION['usuario_email'])) {
         </section>
     </div>
 
+    <!-- Rodapé -->
     <?php include '../header/footer.php'; ?>
 </main>
+
+<script>
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        navLinks.classList.toggle('active');
+    }
+</script>
+
 </body>
 </html>

@@ -1,6 +1,6 @@
-<?php
-include '../header/header.php'; // Incluindo o cabeçalho do site
+<?php include '../header/header.php'; // Incluindo o cabeçalho do site ?>
 
+<?php
 // Processar o formulário quando for enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $database = new Database();
@@ -25,139 +25,176 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fale Conosco - CemFreelas</title>
-</head>
-<body>
     <style>
-        /* Resetando o estilo de algumas tags */
+        /* Resetando estilos */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Estilo Geral da Página */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb; /* Cor de fundo clara */
             color: #333;
             line-height: 1.6;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centraliza o conteúdo */
-            justify-content: center; /* Mantém o alinhamento */
+            align-items: center; /* Centraliza a página */
             min-height: 100vh;
         }
 
-        /* Container Principal */
+        /* Container principal */
         .container {
-            max-width: 1000px; /* Largura máxima */
-            width: 90%; /* Ajuste em telas menores */
-            background-color: #fff;
-            padding: 20px;
+            width: 100%;
+            max-width: 900px;
+            background-color: #ffffff;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin: 30px 0; /* Espaço superior e inferior */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-top: 30px;
         }
 
-        /* Títulos */
-        h2 {
-            font-size: 24px;
-            color: #007bff; /* Azul */
-            margin-bottom: 15px;
+        h1 {
+            font-size: 30px;
+            color: #3b3f47;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        /* Contato - Informações */
-        .contact-info p {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        /* Links */
-        .contact-info a,
-        .social-links a {
-            color: #007bff; /* Azul */
-            text-decoration: none;
-        }
-
-        .contact-info a:hover,
-        .social-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Redes Sociais */
-        .social-links ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        .social-links li {
-            margin: 10px 0;
-        }
-
-        /* Formulário */
+        /* Formulário de contato */
         form {
             display: flex;
             flex-direction: column;
+            gap: 20px;
         }
 
         label {
             font-size: 14px;
+            color: #666;
             margin-bottom: 5px;
         }
 
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            padding: 10px;
-            margin-bottom: 15px;
+        input[type="text"], input[type="email"], textarea {
+            padding: 12px;
+            font-size: 16px;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+            border-color: #FF7F50; /* Laranja */
+            background-color: #ffffff;
         }
 
         textarea {
             resize: vertical;
+            min-height: 120px;
         }
 
         button {
-            padding: 10px 15px;
-            background-color: #007bff; /* Azul */
-            color: #fff;
+            padding: 12px 20px;
+            background-color: #FF7F50; /* Laranja */
+            width: 50%;
+            color: white;
             border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            border-radius: 6px;
             font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #0056b3; /* Azul escuro */
+            background-color: #E75A28; /* Laranja escuro */
         }
 
-        /* Estilos Responsivos */
+        /* Estilos para os links */
+        a {
+            color: #FF7F50; /* Laranja */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Informações de contato */
+        .contact-info, .social-links {
+            margin-top: 40px;
+        }
+
+        .contact-info p, .social-links p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .social-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .social-links li {
+            margin-bottom: 8px;
+        }
+
+        .social-links a {
+            font-size: 16px;
+            color: #3b3f47; /* Cor escura para links */
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilos responsivos */
         @media (max-width: 768px) {
             .container {
-                padding: 15px;
+                padding: 20px;
+                width: 90%;
             }
 
-            h2 {
-                font-size: 20px;
+            h1 {
+                font-size: 26px;
             }
         }
     </style>
+</head>
+<body>
+
 
     <div class="container">
-        <!-- Seção de Contato -->
+        <!-- Título -->
+        <h1>Fale Conosco</h1>
+
+        <!-- Formulário de Contato -->
+        <form method="POST" action="fale_conosco.php">
+            <label for="nome">Seu Nome</label>
+            <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+
+            <label for="email">Seu E-mail</label>
+            <input type="email" id="email" name="email" required placeholder="Digite seu e-mail">
+
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" name="mensagem" required placeholder="Escreva sua mensagem aqui..."></textarea>
+
+            <button type="submit">Enviar Mensagem</button>
+        </form>
+
+        <!-- Informações de Contato -->
         <div class="contact-info">
-            <h2>Fale Conosco</h2>
-            <p>Tem dúvidas ou precisa de mais informações? Não hesite em entrar em contato! Estamos sempre à disposição para ajudar.</p>
+            <h2>Informações de Contato</h2>
             <p><strong>Telefone:</strong> (11) 1234-5678</p>
             <p><strong>E-mail:</strong> <a href="mailto:contato@cemfreelas.com.br">contato@cemfreelas.com.br</a></p>
         </div>
 
-        <!-- Seção de Redes Sociais -->
+        <!-- Redes Sociais -->
         <div class="social-links">
             <h2>Siga-nos nas Redes Sociais</h2>
-            <p>Fique por dentro de todas as novidades, dicas e conteúdos exclusivos seguindo nossas redes sociais:</p>
             <ul>
                 <li><a href="https://facebook.com/cemfreelas" target="_blank">Facebook: facebook.com/cemfreelas</a></li>
                 <li><a href="https://instagram.com/cemfreelas" target="_blank">Instagram: @cemfreelas</a></li>
@@ -165,12 +202,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <li><a href="https://linkedin.com/company/cemfreelas" target="_blank">LinkedIn: linkedin.com/company/cemfreelas</a></li>
             </ul>
         </div>
-
-        <!-- Link para o formulário de contato -->
-        <a href="fale_conosco.php" class="button">Enviar Mensagem</a>
     </div>
+
+    <!-- Rodapé -->
+    <?php include '../header/footer.php'; ?>
+
 </body>
-
-<?php include '../header/footer.php'?>
-
 </html>

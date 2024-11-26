@@ -1,42 +1,42 @@
 <?php
-include '../header/header.php';
-include_once '../db/DB.php'; // Incluir a conexão com o banco
-include_once '../db/Usuario.php'; // Incluir a classe Usuario
+// Incluindo as dependências
+include_once '../db/DB.php'; // Incluindo a conexão com o banco
+include_once '../db/Usuario.php'; // Incluindo a classe Usuario
 
-// Instanciar a classe DB e conectar ao banco de dados
+// Conectando ao banco de dados
 $db = new DB();
-$conn = $db->connect(); // Estabelece a conexão
+$conn = $db->connect(); // Estabelece a conexão com o banco
 
-// Verificar se a conexão foi bem-sucedida
+// Verificando se a conexão foi bem-sucedida
 if ($conn === null) {
     die("Erro ao conectar ao banco de dados.");
 }
 
-// Inicia a sessão se ainda não foi iniciada
+// Iniciando a sessão se ainda não foi iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Verificar se o usuário está logado
+// Verificando se o usuário está logado
 if (!isset($_SESSION['usuario_email'])) {
-    header("Location: login.php"); // Redireciona para o login se o usuário não estiver logado
+    header("Location: login.php"); // Redireciona para a página de login
     exit();
 }
 
 $email_usuario = $_SESSION['usuario_email'];
 
-// Instanciar a classe Usuario com a conexão
-$user = new Usuario($conn); // Passando a conexão para o construtor
+// Criando uma instância da classe Usuario
+$user = new Usuario($conn);
 
-// Recuperar os dados do usuário do banco de dados
-$usuario = $user->getUsuarioByEmail($email_usuario);
+// Recuperando os dados do usuário usando o método getUsuarioByEmail
+$usuario = $user->obterNomePorEmail($email_usuario);
 
-// Verificar se o usuário foi encontrado
+// Verificando se o usuário foi encontrado
 if ($usuario === false) {
     die("Usuário não encontrado.");
 }
 
-// Definir os dados do usuário
+// Definindo os dados do usuário
 $nome_usuario = isset($usuario['nome']) ? htmlspecialchars($usuario['nome']) : 'Usuário Anônimo';
 $email_usuario = isset($usuario['email']) ? htmlspecialchars($usuario['email']) : 'Não informado';
 $foto_perfil = isset($usuario['foto_perfil']) && !empty($usuario['foto_perfil'])
@@ -59,13 +59,14 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f4f7fc; /* Fundo claro */
+            background: linear-gradient(135deg, #6f42c1, #ff80bf); /* Gradiente de roxo e rosa */
+            color: #333333; /* Cor das letras ajustada para um tom escuro */
         }
 
         /* Cabeçalho */
         header {
-            background-color: #ff80bf; /* Rosa claro */
-            color: white;
+            background-color: #8e44ad; /* Roxo suave */
+            color: #ffffff; /* Cor das letras no cabeçalho alterada para branco */
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
@@ -82,7 +83,7 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
 
         .logo a {
             text-decoration: none;
-            color: white;
+            color: #ffffff; /* Cor das letras no cabeçalho alterada para branco */
         }
 
         .logo a:hover {
@@ -93,7 +94,7 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
         .barra-pesquisa {
             display: flex;
             align-items: center;
-            background-color: white;
+            background-color: #ffffff;
             padding: 10px;
             border-radius: 25px;
             margin-right: 20px;
@@ -123,7 +124,7 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #ff4d94;
+            background-color: #ff4d94; /* Rosa mais suave */
         }
 
         .menu ul {
@@ -139,7 +140,7 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
 
         .menu ul li a {
             text-decoration: none;
-            color: white;
+            color: #ffffff;
             font-size: 18px;
         }
 
@@ -148,7 +149,7 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
         }
 
         .usuario-info {
-            color: white;
+            color: #ffffff;
             font-size: 18px;
             margin-left: 20px;
         }
@@ -156,16 +157,18 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
         /* Estilo do conteúdo da página */
         .profile-container {
             margin-top: 30px;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .profile-header {
             display: flex;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .profile-header .image {
@@ -176,15 +179,20 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
             border-radius: 50%;
             width: 128px;
             height: 128px;
+            object-fit: cover;
+            border: 2px solid #ff4d94;
         }
 
         .profile-header h2 {
             margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333333;
         }
 
         .profile-header p {
             font-size: 16px;
-            color: #777;
+            color: #777777;
         }
 
         .profile-section {
@@ -194,15 +202,37 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
         .profile-section h3 {
             font-size: 18px;
             margin-bottom: 10px;
+            color: #333333;
         }
 
         .profile-section p {
             font-size: 16px;
-            color: #555;
+            color: #555555;
         }
 
         .buttons a {
             margin-top: 20px;
+        }
+
+        .buttons .button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        /* Cores dos botões */
+        .button.is-link {
+            background-color: #8e44ad; /* Roxo suave */
+            color: white;
+        }
+
+        .button.is-info {
+            background-color: #3498db; /* Azul */
+            color: white;
+        }
+
+        .button.is-danger {
+            background-color: #e74c3c; /* Vermelho */
+            color: white;
         }
 
         /* Responsividade */
@@ -214,16 +244,51 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
 
             .profile-container {
                 margin-top: 20px;
+                padding: 20px;
             }
 
             .profile-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            .buttons .button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+
+<!-- Header adicionado aqui -->
+<header>
+    <!-- Logo e nome do site -->
+    <div class="logo">
+        <a href="../painel/painel.php">
+            <h1>CemFreelas</h1>
+        </a>
+    </div>
+
+    <!-- Barra de Pesquisa -->
+    <div class="barra-pesquisa">
+        <input type="text" placeholder="Pesquise por freelancer ou projeto..." />
+        <button>Pesquisar</button>
+    </div>
+
+    <!-- Menu de Navegação -->
+    <nav class="menu">
+        <ul>
+            <li><a href="projetos.php">Projetos</a></li>
+            <li><a href="perfil.php">Meu Perfil</a></li>
+            <li><a href="contato.php">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- Informações do Usuário -->
+    <div class="usuario-info">
+        <span>Bem-vindo, <?php echo $nome_usuario; ?>!</span>
+    </div>
+</header>
 
 <!-- Conteúdo principal da página de perfil -->
 <main>
@@ -269,5 +334,6 @@ $portfolio = isset($usuario['portfolio']) ? htmlspecialchars($usuario['portfolio
 </main>
 
 <?php include '../header/footer.php'; ?>
+
 </body>
 </html>

@@ -26,12 +26,14 @@ if (isset($_COOKIE['usuario_email'])) {
             background: linear-gradient(135deg, #A3C9FF, #4A76A8);
             color: #333;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Estilo para o menu */
         .navbar {
             background-color: #007BFF; /* Cor do header ajustada para azul */
-            padding: 10px 20px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -39,7 +41,7 @@ if (isset($_COOKIE['usuario_email'])) {
         }
 
         .navbar .logo {
-            font-size: 22px; /* Tamanho da logo reduzido */
+            font-size: 24px; /* Tamanho da logo ajustado */
             color: white;
             font-weight: bold;
         }
@@ -47,7 +49,7 @@ if (isset($_COOKIE['usuario_email'])) {
         /* Barra de Pesquisa */
         .search-bar {
             flex-grow: 1;
-            max-width: 350px; /* Tamanho da barra de pesquisa reduzido */
+            max-width: 350px; /* Tamanho da barra de pesquisa */
             display: flex;
             margin-left: 20px;
         }
@@ -68,6 +70,11 @@ if (isset($_COOKIE['usuario_email'])) {
             border-radius: 20px;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background-color: #B983C1; /* Cor de hover ajustada */
         }
 
         /* Menu de Navegação */
@@ -79,7 +86,14 @@ if (isset($_COOKIE['usuario_email'])) {
         .nav-links a {
             color: white;
             text-decoration: none;
-            font-size: 16px; /* Tamanho das fontes do menu reduzido */
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: #0056b3; /* Cor de hover ajustada */
         }
 
         .hamburger-menu {
@@ -102,7 +116,7 @@ if (isset($_COOKIE['usuario_email'])) {
             top: 60px;
             left: 0;
             width: 100%;
-            background-color: #007BFF; /* Cor do header ajustada para azul */
+            background-color: #007BFF;
             padding: 20px;
             box-sizing: border-box;
             text-align: center;
@@ -130,17 +144,22 @@ if (isset($_COOKIE['usuario_email'])) {
             }
 
             .nav-links a {
-                font-size: 14px; /* Tamanho da fonte do menu no mobile reduzido */
+                font-size: 14px;
+                padding: 12px 0;
+                width: 100%;
+                border-radius: 0;
             }
         }
 
         /* Estilo do conteúdo principal */
         .main-content {
-            padding: 20px 20px; /* Padding reduzido */
+            padding: 20px;
+            flex: 1;
+            background-color: #f4f7fb;
         }
 
         .container {
-            max-width: 1000px; /* Largura da página reduzida */
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -149,7 +168,7 @@ if (isset($_COOKIE['usuario_email'])) {
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            margin-bottom: 30px; /* Margem reduzida */
+            margin-bottom: 40px;
         }
 
         .user-info {
@@ -159,34 +178,34 @@ if (isset($_COOKIE['usuario_email'])) {
 
         .profile-pic {
             border-radius: 50%;
-            width: 80px; /* Tamanho da foto de perfil reduzido */
-            height: 80px; /* Tamanho da foto de perfil reduzido */
+            width: 100px; /* Tamanho ajustado da foto de perfil */
+            height: 100px;
             margin-right: 20px;
             border: 4px solid #D8A6D1;
             object-fit: cover;
         }
 
         h2 {
-            font-size: 22px; /* Tamanho da saudação reduzido */
-            color: #007BFF; /* Cor da saudação ajustada para azul */
+            font-size: 26px; /* Tamanho da saudação ajustado */
+            color: #007BFF;
         }
 
         p {
-            font-size: 16px; /* Tamanho do texto reduzido */
+            font-size: 18px;
             color: #333;
         }
 
         .extra-container {
             background-color: #fff;
-            padding: 15px; /* Padding reduzido */
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: 30px; /* Margem reduzida */
-            color: #007BFF; /* Cor do texto ajustada para azul */
+            margin-top: 40px;
+            color: #007BFF;
         }
 
         .extra-container p {
-            font-size: 14px; /* Tamanho do texto reduzido */
+            font-size: 16px;
             color: #555;
         }
 
@@ -195,18 +214,19 @@ if (isset($_COOKIE['usuario_email'])) {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 30px; /* Margem reduzida */
+            gap: 30px;
+            margin-top: 50px;
         }
 
         .how-it-work-card {
             background-color: #ffffff;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            width: 22%; /* Largura dos cards reduzida */
-            padding: 15px; /* Padding dos cards reduzido */
+            width: 22%;
+            padding: 20px;
             border-radius: 8px;
             transition: transform 0.3s ease;
             text-align: center;
+            overflow: hidden;
         }
 
         .how-it-work-card:hover {
@@ -215,20 +235,20 @@ if (isset($_COOKIE['usuario_email'])) {
 
         .card-image {
             width: 100%;
-            height: 160px; /* Tamanho da imagem reduzido */
+            height: 180px;
             object-fit: cover;
             border-radius: 5px;
-            margin-bottom: 15px; /* Margem reduzida */
+            margin-bottom: 20px;
         }
 
         .card-title {
-            font-size: 18px; /* Tamanho do título reduzido */
-            color: #007BFF; /* Cor ajustada para azul */
+            font-size: 20px;
+            color: #007BFF;
             margin-bottom: 10px;
         }
 
         .card-description {
-            font-size: 14px; /* Tamanho da descrição reduzido */
+            font-size: 14px;
             color: #666;
         }
     </style>
@@ -248,7 +268,7 @@ if (isset($_COOKIE['usuario_email'])) {
         <!-- Menu de Navegação -->
         <div class="nav-links">
             <a href="../header/sobre.php">Sobre</a>
-            <a href="contato.php">Contato</a>
+            <a href="../header/contato.php">Contato</a>
             <a href="projetos.php">Projetos</a>
 
             <!-- Exibe Login ou perfil dependendo do estado de login -->
@@ -316,4 +336,7 @@ if (isset($_COOKIE['usuario_email'])) {
         }
     </script>
 </body>
+<!-- Inclusão do footer com caminho absoluto -->
+<?php include_once '../header/footer.php'; ?>
+
 </html>

@@ -15,12 +15,28 @@ $database = new DB();
 $conn = $database->connect();
 $usuario = new Usuario($conn);
 
-// Recuperar os dados do usuário
+// Recuperar o e-mail do usuário logado
 $email_usuario = $_SESSION['usuario_email'];
-$dados_usuario = $usuario->getUsuarioByEmail($email_usuario);
 
-$nome_usuario = $dados_usuario['nome'] ?? '';
-$email_usuario = $dados_usuario['email'] ?? '';
+// Obter o nome do usuário (com base no método da classe)
+$nome_usuario = $usuario->obterNomePorEmail($email_usuario);
+
+// Caso o nome não seja encontrado
+if ($nome_usuario == 'Usuário não encontrado') {
+    echo "Usuário não encontrado!";
+    exit();
+}
+
+// Recuperar os dados adicionais do banco para o formulário
+$query = "SELECT * FROM usuarios WHERE email = :email LIMIT 1";
+$stmt = $conn->prepare($query);
+$stmt->bindParam(':email', $email_usuario);
+$stmt->execute();
+
+// Obter os dados do usuário
+$dados_usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Preencher as variáveis com os dados do usuário
 $foto_perfil = $dados_usuario['foto_perfil'] ?? 'uploads/fotos_perfil/default-avatar.png';
 $telefone = $dados_usuario['telefone'] ?? '';
 $data_nascimento = $dados_usuario['data_nascimento'] ?? '';
@@ -93,8 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
- 
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -104,6 +118,152 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+<style>
+/* Geral */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container principal */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #fff;
+}
+
+/* Cabeçalho do formulário */
+.perfil-form h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+/* Foto de perfil */
+.foto-perfil {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.foto-perfil img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff;
+    margin-bottom: 15px;
+}
+
+.foto-perfil input[type="file"] {
+    font-size: 14px;
+    color: #fff;
+    background-color: #007bff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.foto-perfil input[type="file"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo dos campos de input */
+.input-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.input-group label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #fff;
+    display: block;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #fff;
+    border-radius: 6px;
+    margin-top: 5px;
+    background-color: #fff;
+    color: #333;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: #2575fc;
+    outline: none;
+    box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+}
+
+/* Botões */
+.btn-container {
+    text-align: center;
+}
+
+button {
+    padding: 15px 30px;
+    background-color: #2575fc;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+}
+
+button:hover {
+    background-color: #6a11cb;
+}
+
+/* Estilo de links */
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px;
+    }
+
+    .foto-perfil img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .input-group input {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+}
+</style>
     <div class="container">
         <div class="perfil-form">
             <h1>Editar Perfil</h1>
@@ -125,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="input-group">
                     <label for="data_nascimento">Data de Nascimento</label>
-                    <input type="date" name="data_nascimento" id="data_nascimento" value="<?php echo $datanascimento; ?>" required>
+                    <input type="date" name="data_nascimento" id="data_nascimento" value="<?php echo $data_nascimento; ?>" required>
                 </div>
 
                 <div class="input-group">
@@ -161,92 +321,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </body>
 </html>
-
-<!-- CSS -->
-<style>
-/* Geral */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-
-/* Container principal */
-.container {
-    width: 100%;
-    max-width: 900px;
-    margin: 50px auto;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Formulário */
-.perfil-form {
-    text-align: center;
-}
-
-.perfil-form h1 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-/* Foto de perfil */
-.foto-perfil {
-    margin-bottom: 20px;
-}
-
-.foto-perfil img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.foto-perfil input[type="file"] {
-    font-size: 14px;
-}
-
-/* Estilo dos inputs */
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.input-group label {
-    font-size: 16px;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-top: 5px;
-}
-
-/* Botões */
-.btn-container {
-    margin-top: 20px;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: #fff;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-</style>
