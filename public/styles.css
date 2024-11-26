@@ -1,0 +1,169 @@
+/* Resetando estilos padrões do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Estilo básico para o index.php */
+.index-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Container principal */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+/* Seção de boas-vindas */
+.welcome-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.welcome-section h2 {
+    font-size: 24px;
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Container adicional de boas-vindas */
+.extra-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.extra-container p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Como funciona - Cartões informativos */
+.how-it-work-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.how-it-work-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Estilos para a barra de navegação */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #333;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.navbar a:hover {
+    background-color: #4CAF50;
+}
+
+/* Rodapé */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+footer a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .how-it-work-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .user-info {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-pic {
+        margin-bottom: 10px;
+    }
+
+    .welcome-section h2 {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .welcome-section {
+        flex-direction: column;
+    }
+
+    .navbar {
+        flex-direction: column;
+    }
+}
