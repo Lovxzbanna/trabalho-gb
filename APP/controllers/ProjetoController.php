@@ -29,5 +29,12 @@ class ProjetoController {
         $projetos = $this->projeto->listarProjetos();
         return $projetos;
     }
+
+    // Função para obter um projeto específico pelo ID
+    public function obterProjeto($id) {
+        $this->projeto->id = $id;
+        $projeto = $this->projeto->obterProjeto();  // Usa o método obterProjeto do modelo Projeto
+        return $projeto;
+    }
 }
 ?>

@@ -50,7 +50,8 @@ if (isset($_SESSION['usuario_email'])) {
         <!-- Seção de boas-vindas -->
         <section class="welcome-section">
             <div class="user-info">
-                <img src="../../img/projetos/fotoperfil.png">
+                <img src="../../img/projetos/fotoperfil.png" alt="Foto de Perfil" class="profile-pic">
+
                 <div>
                     <h2>Seja bem-vindo, Visitante!</h2>
                     <p>Estamos muito felizes em te ter por aqui. Vamos ajudar você a encontrar as melhores oportunidades ou freelancers para o seu projeto.</p>
@@ -157,6 +158,16 @@ if (isset($_SESSION['usuario_email'])) {
         font-size: 18px;
         color: black ;
     }
+    /* Foto de perfil */
+.profile-pic {
+    border-radius: 50%;
+    width: 80px;  /* Ajuste o tamanho conforme necessário */
+    height: 80px; /* Ajuste o tamanho conforme necessário */
+    object-fit: cover;
+    border: 4px solid #D8A6D1;  /* Border para destacar a imagem */
+    margin-right: 20px;
+}
+
 
     /* Cartões informativos */
     .how-it-work-cards {

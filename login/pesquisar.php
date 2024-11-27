@@ -3,13 +3,13 @@
 session_start();
 
 // Incluir as classes
-require_once '../db/DB.php';
-require_once '../db/projeto.php';
-require_once '../db/Usuario.php';
+require_once '../db/Database.php';
+require_once '../APP/models/projeto.php';
+require_once '../APP/models/Usuario.php';
 
 // Criar instância da classe de banco de dados e conectar
-$db = new db();
-$conn = $db->connect();
+$database = new database();
+$conn = $database->connect();
 
 // Obter o termo de busca
 $query = isset($_GET['query']) ? $_GET['query'] : '';

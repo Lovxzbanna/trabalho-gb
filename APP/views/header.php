@@ -149,6 +149,7 @@ body {
     <div class="search-bar">
         <input type="text" placeholder="Pesquisar...">
         <button>Pesquisar</button>
+        <a href="../../login/pesquisar.php"></a>
     </div>
 
     <!-- Menu de Navegação -->
