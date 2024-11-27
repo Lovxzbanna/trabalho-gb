@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_email'])) {
 $email_usuario = $_SESSION['usuario_email'];
 
 // Incluir a classe de usuários e instanciá-la
-include_once '../classes/User.php';
+require_once '../classes/User.php';
 $user = new User();
 
 // Recuperar todos os usuários cadastrados no banco de dados, exceto o usuário atual

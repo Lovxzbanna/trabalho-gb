@@ -2,8 +2,8 @@
 // cadastro.php - Formulário de cadastro e processamento
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Lógica de cadastro de usuário
-    include_once '../db/Database.php';
-    include_once '../app/controllers/UsuarioController.php';
+    require_once '../db/Database.php';
+    require_once '../app/controllers/UsuarioController.php';
     $usuarioController = new UsuarioController();
     $usuarioController->registrarUsuario($_POST['nome'], $_POST['email'], $_POST['senha']);
 }

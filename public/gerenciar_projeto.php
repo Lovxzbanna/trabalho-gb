@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once '../app/controllers/ProjetoController.php';
-include_once '../app/models/Projeto.php';
+require_once '../app/controllers/ProjetoController.php';
+require_once '../app/models/Projeto.php';
 
 $projetoController = new ProjetoController();
 $usuarioId = $_SESSION['usuario_id'];  // ID do usuário logado

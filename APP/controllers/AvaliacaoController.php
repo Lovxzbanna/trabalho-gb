@@ -1,6 +1,6 @@
 <?php
-include_once '../models/Avaliacao.php';
-include_once '../db/Database.php';
+require_once '../models/Avaliacao.php';
+require_once '../db/Database.php';
 
 class AvaliacaoController {
     private $db;

@@ -1,6 +1,6 @@
 <?php
-include_once '../db/Database.php';
-include_once '../models/Projeto.php';
+require_once '../db/Database.php';
+require_once '../models/Projeto.php';
 
 $database = new Database();
 $db = $database->getConnection();

@@ -1,6 +1,6 @@
 <?php
-include_once '../models/Categoria.php';
-include_once '../db/Database.php';
+require_once '../models/Categoria.php';
+require_once '../db/Database.php';
 
 class CategoriaController {
     private $db;

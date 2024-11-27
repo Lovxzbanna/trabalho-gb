@@ -3,8 +3,8 @@
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include_once '../db/Database.php';
-    include_once '../app/controllers/UsuarioController.php';
+    require_once '../db/Database.php';
+    require_once '../app/controllers/UsuarioController.php';
     $usuarioController = new UsuarioController();
     
     if (isset($_POST['alterar_senha'])) {

@@ -11,8 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cvv = $_POST['cvv'];
 
     // Incluir as classes de conexão e processamento de pagamento
-    include_once 'Database.php'; // Incluir a classe Database
-    include_once 'Pagamento.php'; // Incluir a classe Pagamento
+    require_once 'Database.php'; // Incluir a classe Database
+    require_once 'Pagamento.php'; // Incluir a classe Pagamento
 
     try {
         // Criar a conexão com o banco de dados

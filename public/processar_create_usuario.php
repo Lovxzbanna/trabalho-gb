@@ -1,6 +1,6 @@
 <?php
-include_once '../db/Database.php';
-include_once '../models/Usuario.php';
+require_once '../db/Database.php';
+require_once '../models/Usuario.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = new Database();

@@ -1,9 +1,9 @@
-<?php
+<?php include 'header.php'?><?php
 // login.php - Formulário de login e processamento
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Lógica de validação de login aqui
-    include_once '../db/Database.php';  // Conexão com o banco de dados
-    include_once '../app/controllers/UsuarioController.php';
+    require_once '../../db/Database.php';  // Conexão com o banco de dados
+    require_once '../../app/controllers/UsuarioController.php';
 
     $usuarioController = new UsuarioController();
     
@@ -33,15 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
-<form action="login.php" method="POST">
-    <label for="email">Email:</label>
-    <input type="email" name="email" required>
-
-    <label for="senha">Senha:</label>
-    <input type="password" name="senha" required>
-
-    <button type="submit">Login</button>
-</form>
 
 <?php if (isset($erro)): ?>
     <p style="color: red;"><?php echo $erro; ?></p>
@@ -67,8 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             line-height: 1.6;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center; /* Centraliza verticalmente */
             min-height: 100vh;
         }
 
@@ -80,8 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            margin-top: 20px;
+            margin: 50px 50px 50px 450px  ;
             text-align: center;
+            align-items: center;
+            justify-content: center; /* Centraliza verticalmente */
         }
 
         h1 {

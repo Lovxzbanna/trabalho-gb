@@ -1,6 +1,6 @@
 <?php
-include_once '../models/Produto.php';
-include_once '../db/Database.php';
+require_once '../models/Produto.php';
+require_once '../db/Database.php';
 
 class ProdutoController {
     private $db;

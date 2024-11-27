@@ -4,13 +4,13 @@ session_start();
 
 // Verifica se o método de requisição é POST para editar o perfil
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    include_once '../../app/controllers/UsuarioController.php';  // Caminho corrigido
+    require_once '../../app/controllers/UsuarioController.php';  // Caminho corrigido
     $usuarioController = new UsuarioController();
     $usuarioController->editarPerfil($_SESSION['user_id'], $_POST['nome'], $_POST['email'], $_POST['senha']);
 }
 
 // Incluir novamente o controller para obter os dados do usuário
-include_once '../../app/controllers/UsuarioController.php';  // Caminho corrigido
+require_once '../../app/controllers/UsuarioController.php';  // Caminho corrigido
 $usuarioController = new UsuarioController();
 $usuario = $usuarioController->obterUsuario($_SESSION['user_id']);
 ?>

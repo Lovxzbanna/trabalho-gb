@@ -1,7 +1,7 @@
 <?php
 // mensagens.php - Exibição e gestão de mensagens
-include_once '../db/Database.php';
-include_once '../app/controllers/MensagemController.php';
+require_once '../db/Database.php';
+require_once '../app/controllers/MensagemController.php';
 
 $mensagemController = new MensagemController();
 

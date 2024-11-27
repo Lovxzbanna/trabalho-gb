@@ -1,7 +1,7 @@
 <?php
 include 'header.php';
 // Incluir o controlador
-include_once '../controllers/UsuarioController.php';
+require_once '../controllers/UsuarioController.php';
 
 // Verificar se o usuário está logado
 $emailUsuario = isset($_SESSION['usuario_email']) ? $_SESSION['usuario_email'] : null;

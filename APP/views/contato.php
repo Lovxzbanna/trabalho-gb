@@ -1,3 +1,4 @@
+<?php include 'header.php' ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -304,6 +305,7 @@
         navLinks.classList.toggle('active');
     }
 </script>
-<?php include 'header.php' ?>
+
 </body>
+<?php include 'footer.php'?>
 </html>

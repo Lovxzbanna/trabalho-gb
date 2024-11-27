@@ -1,9 +1,9 @@
 <?php 
-include '../app/views/header.php';
+include 'header.php';
 
 // Inclusão dos arquivos de conexão e de usuário
-require_once '../db/Database.php';
-require_once '../app/models/Usuario.php';
+require_once '../../db/Database.php';
+require_once '../models/Usuario.php';
 
 // Conexão com o banco de dados
 $database = new Database();  // Conecta ao banco de dados
@@ -50,9 +50,9 @@ if (isset($_SESSION['usuario_email'])) {
         <!-- Seção de boas-vindas -->
         <section class="welcome-section">
             <div class="user-info">
-                <img src="<?php echo htmlspecialchars($foto_perfil); ?>" alt="Foto de Perfil" class="profile-pic">
+                <img src="../../img/projetos/fotoperfil.png">
                 <div>
-                    <h2>Seja bem-vindo, <?php echo htmlspecialchars($nome_usuario); ?>!</h2>
+                    <h2>Seja bem-vindo, Visitante!</h2>
                     <p>Estamos muito felizes em te ter por aqui. Vamos ajudar você a encontrar as melhores oportunidades ou freelancers para o seu projeto.</p>
                 </div>
             </div>
@@ -66,26 +66,26 @@ if (isset($_SESSION['usuario_email'])) {
         <!-- Como funciona - Cartões informativos -->
         <section class="how-it-work-cards">
             <div class="how-it-work-card">
-                <img src="../img/projetos/publiquepj.jpg" alt="Login" class="card-image">
+                <img src="../../img/projetos/publiquepj.jpg" alt="Login" class="card-image">
                 <p class="card-description">Acesse sua conta ou cadastre-se para começar a explorar.</p>
             </div>
             <div class="how-it-work-card">
-                <img src="../img/projetos/selecione.avif" alt="Freelancer" class="card-image">
+                <img src="../../img/projetos/selecione.avif" alt="Freelancer" class="card-image">
                 <p class="card-description">Encontre freelancers talentosos prontos para trabalhar no seu projeto.</p>
             </div>
             <div class="how-it-work-card">
-                <img src="../img/projetos/obtenha.webp" alt="Contrate" class="card-image">
+                <img src="../../img/projetos/obtenha.webp" alt="Contrate" class="card-image">
                 <p class="card-description">Contrate o freelancer ideal e comece a trabalhar no seu projeto.</p>
             </div>
             <div class="how-it-work-card">
-                <img src="../img/projetos/pagando.avif" alt="Pagamento" class="card-image">
+                <img src="../../img/projetos/pagando.avif" alt="Pagamento" class="card-image">
                 <p class="card-description">Nós garantimos que o pagamento seja seguro e que ambas as partes fiquem satisfeitas.</p>
             </div>
         </section>
     </div>
 
     <!-- Rodapé -->
-    <?php include '../app/views/footer.php'; ?>
+    <?php include 'footer.php'; ?>
 </main>
 
 <script>
@@ -150,6 +150,7 @@ if (isset($_SESSION['usuario_email'])) {
     h2 {
         font-size: 26px;
         color: black;
+        
     }
 
     p {

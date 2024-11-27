@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Conectar ao banco de dados
-include_once '../db/db.php';  // Ajuste o caminho conforme necessário
+require_once '../db/db.php';  // Ajuste o caminho conforme necessário
 
 // Verificar se o ID do produto foi passado na URL
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {

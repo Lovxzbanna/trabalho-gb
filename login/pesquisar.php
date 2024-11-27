@@ -3,9 +3,9 @@
 session_start();
 
 // Incluir as classes
-include_once '../db/DB.php';
-include_once '../db/projeto.php';
-include_once '../db/Usuario.php';
+require_once '../db/DB.php';
+require_once '../db/projeto.php';
+require_once '../db/Usuario.php';
 
 // Criar instância da classe de banco de dados e conectar
 $db = new db();
@@ -109,7 +109,7 @@ if ($query) {
 <body>
 
 <!-- Inclusão do header -->
-<?php include_once '../header/header.php'; ?>
+<?php require_once '../header/header.php'; ?>
 
 <!-- Conteúdo Principal -->
 <div class="container">
@@ -139,6 +139,6 @@ if ($query) {
 </body>
 </html>   
 <!-- Inclusão do footer com caminho absoluto -->
-<?php include_once '../header/footer.php'; ?>
+<?php require_once '../header/footer.php'; ?>
 
   

@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Incluir a classe de conexão PDO
-include_once 'Database.php';  // Inclua o caminho correto
+require_once 'Database.php';  // Inclua o caminho correto
 
 // Criar uma instância da classe Database e obter a conexão
 $db = new Database();
