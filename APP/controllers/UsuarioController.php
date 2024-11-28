@@ -3,7 +3,8 @@ class UsuarioController {
     // Método para cadastrar o usuário
     public function CadastrarUsuario($nome, $email, $nascimento, $tipo_usuario, $senha) {
         require_once '../../db/Database.php';  // Conexão com o banco de dados
-        $pdo = Database::getConnection();  // Supondo que você tenha uma classe de conexão com o banco
+        include '../models/Usuario.php';
+        $pdo = (new Database)->getConnection();  // Supondo que você tenha uma classe de conexão com o banco
 
         // SQL para inserir os dados do usuário no banco
         $sql = "INSERT INTO usuarios (nome, email, nascimento, tipo_usuario, senha) 
@@ -28,6 +29,13 @@ class UsuarioController {
         } else {
             return false;  // Caso contrário, retorna falso
         }
+    }
+    public function validarLogin($email,$senha){
+        
+        if($this->email == $email AND $this->senha == $senha ) {
+            
+        }
+    
     }
 }
 ?>

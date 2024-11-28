@@ -4,19 +4,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once '../../db/Database.php';  // Conexão com o banco de dados
     require_once '../../APP/controllers/UsuarioController.php';
 
+    $nascimento = $_POST['nascimento'];
+    if (strpos($nascimento, '2024') !== false) {
+        $erro = 'Não é permitido cadastrar usuários nascidos no ano de 2024.';
+    } else {
+        
     // Criação da instância da classe com o nome de variável mais intuitivo
     $usuarioController = new UsuarioController();
 
     // Processamento do cadastro (certifique-se de que o nome do método esteja correto)
     $usuario = $usuarioController->CadastrarUsuario($_POST['nome'], $_POST['email'], $_POST['nascimento'], $_POST['tipo_usuario'], $_POST['senha']);
     
-    if ($usuario) {
+    if ($usuario) { 
         // Se o cadastro for bem-sucedido, redireciona para o login
         header('Location: login.php');
         exit();
     } else {
         // Se ocorrer algum erro no cadastro
         $erro = 'Erro ao cadastrar. Tente novamente.';
+    }
     }
 }
 ?>
@@ -146,7 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container">
     <h1>Cadastro</h1>
 
-    <form action="cadastro.php" method="POST">
+    <form action="processar_cadastro.php" method="POST">
         <label for="nome">Nome de Usuário:</label>
         <input type="text" name="nome" required>
 
@@ -170,10 +176,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <button type="submit">Registrar</button>
     </form>
-
-    <form action="processar_cadastro.php" method="POST">
-    <!-- Campos do formulário -->
-</form>
 
     <a href="login.php">Já tem uma conta? Faça login</a>
 </div>

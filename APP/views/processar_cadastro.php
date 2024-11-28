@@ -4,7 +4,7 @@
 // Verifica se o formulário foi enviado via POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once '../../db/Database.php';  // Conexão com o banco de dados
-    require_once '../../app/controllers/UsuarioController.php';
+    require_once '../../APP/controllers/UsuarioController.php';
 
     // Recupera os dados do formulário
     $nome = $_POST['nome'];

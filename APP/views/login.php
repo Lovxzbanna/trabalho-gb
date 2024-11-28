@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuarioController = new UsuarioController();
     
     // Valida o login e obtém os dados do usuário
-    $usuario = $usuarioController->validarLogin($_POST['email'], $_POST['senha']);
+    $usuario = $usuarioController->validarLogin($_POST['email'],$_POST['senha']);
     
     if ($usuario) {
         // Se o login for válido, verifica o tipo de usuário e redireciona
