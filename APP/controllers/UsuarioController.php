@@ -1,55 +1,33 @@
 <?php
-require_once '../models/Usuario.php';
-require_once '../../db/Database.php';
-
 class UsuarioController {
-    private $db;
-    private $usuario;
+    // Método para cadastrar o usuário
+    public function CadastrarUsuario($nome, $email, $nascimento, $tipo_usuario, $senha) {
+        require_once '../../db/Database.php';  // Conexão com o banco de dados
+        $pdo = Database::getConnection();  // Supondo que você tenha uma classe de conexão com o banco
 
-    public function __construct() {
-        $database = new Database();
-        $this->db = $database->getConnection();
-        $this->usuario = new Usuario($this->db);
-    }
+        // SQL para inserir os dados do usuário no banco
+        $sql = "INSERT INTO usuarios (nome, email, nascimento, tipo_usuario, senha) 
+                VALUES (:nome, :email, :nascimento, :tipo_usuario, :senha)";
+        
+        // Preparando a consulta
+        $stmt = $pdo->prepare($sql);
 
-    // Função para buscar usuário por email
-    public function getUsuarioByEmail($email) {
-        return $this->usuario->buscarUsuarioPorEmail($email);
-    }
+        // Bind dos parâmetros
+        $stmt->bindParam(':nome', $nome);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':nascimento', $nascimento);
+        $stmt->bindParam(':tipo_usuario', $tipo_usuario);
+        $stmt->bindParam(':senha', $senha);  // Aqui é recomendável fazer a criptografia, mas vou manter simples
 
-    // Função para editar usuário
-    public function editarUsuario() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            // Pegando os valores do formulário
-            $this->usuario->nome = $_POST['nome'];
-            $this->usuario->email = $_POST['email'];
-            $this->usuario->telefone = $_POST['telefone'];
-            $this->usuario->endereco = $_POST['endereco'];
-            $this->usuario->data_nascimento = $_POST['data_nascimento'];
+        // Executa a consulta
+        $stmt->execute();
 
-            // Editando o usuário
-            if ($this->usuario->editarUsuario()) {
-                echo "Usuário editado com sucesso!";
-            } else {
-                echo "Erro ao editar usuário.";    
-            }
-        }
-    }
-
-    // Função para excluir usuário
-    public function excluirUsuario($email) {
-        $this->usuario->email = $email;
-
-        if ($this->usuario->excluirUsuario()) {
-            echo "Usuário excluído com sucesso!";
+        // Retorna verdadeiro se o cadastro foi bem-sucedido
+        if ($stmt->rowCount() > 0) {
+            return true;
         } else {
-            echo "Erro ao excluir usuário.";
+            return false;  // Caso contrário, retorna falso
         }
-    }
-
-    // Função para listar usuários
-    public function listarUsuarios() {
-        return $this->usuario->listarUsuarios();
     }
 }
 ?>

@@ -1,4 +1,4 @@
-<?php include 'header.php'?><?php
+<?php 
 // login.php - Formulário de login e processamento
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Lógica de validação de login aqui
@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button type="submit">Login</button>
     </form>
 
-    <a href="registrar.php">Ainda não tem uma conta? Registre-se</a>
+    <a href="cadastro.php">Ainda não tem uma conta? Registre-se</a>
 </div>
 
 </body>

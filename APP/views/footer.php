@@ -1,5 +1,5 @@
 <footer>
-    <p>&copy; 2024 Trabalho final. Feito por: Anna.</p>
+    <p>&copy; 2024 Trabalho final. Todos os direitos serão preservados.</p>
 </footer>
 
 <style>

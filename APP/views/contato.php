@@ -69,26 +69,25 @@
             align-items: center;
         }
 
-        header .search-bar input[type="text"] {
+        .search-bar input {
             padding: 8px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
             width: 200px;
-            transition: border-color 0.3s ease;
         }
+
 
         header .search-bar input[type="text"]:focus {
             border-color: #FF7F50; /* Laranja */
         }
 
-        header .search-bar button {
-            padding: 8px 12px;
-            background-color: #FFB6C1; /* Rosa claro */
+        .search-bar button {
+            padding: 8px 16px;
+            background-color: #D8A6D1;
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             color: white;
-            cursor: pointer;
         }
 
         header .search-bar button:hover {
@@ -141,7 +140,7 @@
 
         /* Resetando estilos para o corpo da página */
         body {
-            padding-top: 80px; /* Espaço para o cabeçalho fixo */
+            padding-top: 90px; /* Espaço para o cabeçalho fixo */
         }
 
         /* Container principal */
@@ -270,7 +269,7 @@
 <div class="container">
     <h1>Entre em contato conosco</h1>
 
-    <form action="enviar_mensagem.php" method="POST">
+    <form action="mensagem.php" method="POST">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
 

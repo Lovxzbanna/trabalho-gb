@@ -1,6 +1,6 @@
 <?php
 require_once '../models/Mensagem.php';
-require_once '../db/Database.php';
+require_once '../../db/Database.php';
 
 class MensagemController {
     private $db;

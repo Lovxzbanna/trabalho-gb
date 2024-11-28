@@ -145,12 +145,14 @@ body {
     <header class="navbar">
     <div class="logo">CemFreelas</div>
 
-    <!-- Barra de Pesquisa -->
-    <div class="search-bar">
-        <input type="text" placeholder="Pesquisar...">
-        <button>Pesquisar</button>
-        <a href="../../login/pesquisar.php"></a>
-    </div>
+  <!-- Barra de Pesquisa -->
+<div class="search-bar">
+ <form __DIR__= "pesquisar.php" method="POST">
+        <input type="text" name="query" placeholder="Pesquisar...">
+        <button type="submit">Pesquisar</button>
+    </form>
+</div>
+
 
     <!-- Menu de Navegação -->
     <div class="nav-links">
