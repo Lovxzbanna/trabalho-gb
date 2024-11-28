@@ -31,11 +31,17 @@ class UsuarioController {
         }
     }
     public function validarLogin($email,$senha){
-        
-        if($this->email == $email AND $this->senha == $senha ) {
-            
-        }
-    
+        $banco = (new Database())->getConnection();
+
+        $sql = "SELECT * from usuarios where email = :e and senha = :s";
+        $stmn = $banco->prepare($sql);
+
+        $stmn->bindValue("e",$email);
+        $stmn->bindValue("s",$senha);
+
+        $stmn->execute();
+
+        return $stmn->fetch(PDO::FETCH_ASSOC);
     }
 }
 ?>
