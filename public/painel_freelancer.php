@@ -19,7 +19,7 @@ if (!isset($_SESSION['usuario_id'])) {
     </header>
 
     <main>
-        <h2>Bem-vindo, <?php echo $_SESSION['usuario_nome']; ?>!</h2>
+    <h2>Bem-vindo, <?php echo htmlspecialchars($usuario_nome, ENT_QUOTES, 'UTF-8'); ?>!</h2>
         <a href="detalhes_projeto.php">Meus Projetos</a>
         <a href="editar_projeto.php">Editar Projeto</a>
         <a href="excluir_projeto.php">Excluir Projeto</a>

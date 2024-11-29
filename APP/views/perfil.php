@@ -183,7 +183,7 @@ footer {
             <div class="perfil-dados">
                 <?php if (!empty($usuario['foto_perfil'])): ?>
                     <img src="<?php echo htmlspecialchars($usuario['foto_perfil']); ?>" alt="Foto de Perfil" width="150" height="150" style="border-radius: 50%; margin-bottom: 20px;">
-                <?php else: ?>
+                <?php else: ?>,
                     <p><strong>Foto de Perfil:</strong> Não informada</p>
                 <?php endif; ?>
 

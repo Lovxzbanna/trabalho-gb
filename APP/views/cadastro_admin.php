@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+<?php
+
+// cadastro.php - Formulário de cadastro e processamento
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    require_once '../../db/Database.php';  // Conexão com o banco de dados
+    require_once '../../APP/controllers/AminController.php';
+    
+    // Criação da instância da classe com o nome de variável mais intuitivo
+    $AdminController = new AdminController();
+
+    // Processamento do cadastro (certifique-se de que o nome do método esteja correto)
+    $AdminController = $AdminController->CadastrarUsuario($_POST['nome'], $_POST['email'], $_POST['senha']);
+    
+    if ($usuario) { 
+        // Se o cadastro for bem-sucedido, redireciona para o login
+        header('Location: login.php');
+        exit();
+    } else {
+        // Se ocorrer algum erro no cadastro
+        $erro = 'Erro ao cadastrar. Tente novamente.';
+    }
+    }
+
+?>
+    <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
