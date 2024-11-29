@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Copiando estrutura do banco de dados para login
-CREATE DATABASE IF NOT EXISTS `login` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+
+CREATE DATABASE IF NOT EXISTS `login`;
 USE `login`;
 
--- Copiando estrutura para tabela login.contatos
+
 CREATE TABLE IF NOT EXISTS `contatos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
@@ -30,9 +30,9 @@ CREATE TABLE IF NOT EXISTS `contatos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela login.contatos: ~0 rows (aproximadamente)
 
--- Copiando estrutura para tabela login.favoritos
+
+
 CREATE TABLE IF NOT EXISTS `favoritos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_id` int(11) NOT NULL,
@@ -41,9 +41,7 @@ CREATE TABLE IF NOT EXISTS `favoritos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela login.favoritos: ~0 rows (aproximadamente)
 
--- Copiando estrutura para tabela login.mensagens
 CREATE TABLE IF NOT EXISTS `mensagens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_remetente` int(11) NOT NULL,
@@ -58,9 +56,7 @@ CREATE TABLE IF NOT EXISTS `mensagens` (
   KEY `id_destinatario` (`id_destinatario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela login.mensagens: ~0 rows (aproximadamente)
 
--- Copiando estrutura para tabela login.projetos
 CREATE TABLE IF NOT EXISTS `projetos` (
   `projeto_id` int(11) NOT NULL AUTO_INCREMENT,
   `nome_produto` varchar(50) NOT NULL,
@@ -72,11 +68,11 @@ CREATE TABLE IF NOT EXISTS `projetos` (
   PRIMARY KEY (`projeto_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela login.projetos: ~1 rows (aproximadamente)
+
 INSERT INTO `projetos` (`projeto_id`, `nome_produto`, `descricao`, `usuario_email`, `data_criacao`, `valor`, `foto`) VALUES
 	(1, 'Banana', 'banana', 'annachristina0500@gmail.com', '2024-11-23 23:18:24', 1000000.00, '../perfil/uploads/bananaazul.jpeg');
 
--- Copiando estrutura para tabela login.senhaa
+
 CREATE TABLE IF NOT EXISTS `senhaa` (
   `senha_id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
@@ -86,9 +82,7 @@ CREATE TABLE IF NOT EXISTS `senhaa` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela login.senhaa: ~0 rows (aproximadamente)
 
--- Copiando estrutura para tabela login.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `usuario_id` int(10) NOT NULL AUTO_INCREMENT,
   `nome` varchar(50) NOT NULL,
@@ -111,12 +105,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela login.usuarios: ~1 rows (aproximadamente)
+
 INSERT INTO `usuarios` (`usuario_id`, `nome`, `email`, `senha`, `foto_perfil`, `data_criacao`, `datanascimento`, `tipo_usuario`, `data_nascimento`, `redes_sociais`, `portfolio`, `telefone`, `instagram`, `linkedin`, `facebook`, `github`, `role`) VALUES
 	(17, 'Anna Christina', 'annachristina0500@gmail.com', '222222', 'uploads/fotos_perfil/67435ba56777c.jpeg', NULL, NULL, 'cliente', '2002-02-20', NULL, '', '21982048850', '@lovxzb.anna', '', '', '', 'user');
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
+

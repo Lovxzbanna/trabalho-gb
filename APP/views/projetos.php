@@ -4,11 +4,6 @@ require_once '../controllers/ProjetoController.php';
 
 $projetoController = new ProjetoController();
 
-// Verifica se o parâmetro "id" foi passado na URL
-if (!isset($_GET['id'])) {
-    header('Location: lista_projetos.php'); // Redirecione para a página de lista de projetos
-    exit;
-}
 
 // Obtém os detalhes do projeto
 try {

@@ -56,8 +56,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: #333;
             line-height: 1.6;
             display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            justify-content: center; /* Centraliza horizontalmente */
+            align-items: center; /* Centraliza verticalmente */
+            min-height: 100vh; /* Ocupa toda a altura da tela */
         }
 
         /* Container principal */
@@ -68,10 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            margin: 50px 50px 50px 450px  ;
             text-align: center;
-            align-items: center;
-            justify-content: center; /* Centraliza verticalmente */
         }
 
         h1 {
@@ -128,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         /* Estilos para links */
         a {
-            color: #D8A6D1; /* Rosa claro */
+            color: #D 8A6D1; /* Rosa claro */
             text-decoration: none;
             margin-top: 20px;
         }
