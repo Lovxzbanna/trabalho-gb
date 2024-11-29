@@ -69,6 +69,7 @@ if (isset($_SESSION['usuario_email'])) {
             <div class="how-it-work-card">
                 <img src="../../img/projetos/publiquepj.jpg" alt="Login" class="card-image">
                 <p class="card-description">Acesse sua conta ou cadastre-se para começar a explorar.</p>
+              
             </div>
             <div class="how-it-work-card">
                 <img src="../../img/projetos/selecione.avif" alt="Freelancer" class="card-image">
@@ -79,7 +80,7 @@ if (isset($_SESSION['usuario_email'])) {
                 <p class="card-description">Contrate o freelancer ideal e comece a trabalhar no seu projeto.</p>
             </div>
             <div class="how-it-work-card">
-                <img src="../../img/projetos/pagando.avif" alt="Pagamento" class="card-image">
+                <img src="../../../img/projetos/pagando.avif" alt="Pagamento" class="card-image">
                 <p class="card-description">Nós garantimos que o pagamento seja seguro e que ambas as partes fiquem satisfeitas.</p>
             </div>
             <!-- Banner de Política de Cookies -->

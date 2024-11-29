@@ -1,4 +1,3 @@
-<?php
 // Iniciar a sessão para garantir que o cabeçalho funcione corretamente
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -42,16 +41,18 @@ if (isset($_SESSION['usuario_email'])) {
 </head>
 <body>
     <style>
-        /* Estilos personalizados para o layout */
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
+       
+    /* Corpo da Página */
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #4A76A8, #6A4C9C, #D8A6D1); /* Gradiente azul, roxo e rosa */
+        color: #333;
+        min-height: 100vh;
+        line-height: 1,5;
+    }
 
         header {
-            background-color: #4a6fa5;
+            background-color: purple;
             color: white;
             padding: 20px 0;
             text-align: center;
@@ -109,9 +110,9 @@ if (isset($_SESSION['usuario_email'])) {
         }
 
         .footer {
-            background-color: #4a6fa5;
+            background-color: purple;
             color: white;
-            padding: 20px 0;
+            padding: 10px 0;
             text-align: center;
             position: fixed;
             bottom: 0;

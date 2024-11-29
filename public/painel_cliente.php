@@ -31,8 +31,7 @@
         <section class="client-panel">
             <h2>Painel do Cliente</h2>
             <div class="client-links">
-                <a href="meus_projetos.php">Meus Projetos</a>
-                <a href="comprar_projeto.php">Comprar Projetos</a>
+
                 <a href="alterar_senha.php">Alterar Senha</a>
                 <a href="deletar_conta.php?id=<?php echo $_SESSION['usuario_id']; ?>">Excluir Conta</a>
             </div>
