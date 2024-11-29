@@ -58,7 +58,12 @@
             </div>
         </section>
     </div>
-
+          <!-- Banner de Política de Cookies -->
+          <div id="cookie-banner" class="cookie-banner">
+    <p>Este site utiliza cookies para melhorar a sua experiência. Ao continuar a navegar, você concorda com a nossa 
+        <a href="politica-de-cookies.php">Política de Cookies</a>.</p>
+    <button id="accept-cookies">Aceitar</button>
+</div>
     <!-- Rodapé -->
     <?php include 'footer.php'; ?>
 </main>
@@ -69,6 +74,19 @@
         navLinks.classList.toggle('active');
     }
 </script>
+<script>
+    // Verifica se o usuário já aceitou os cookies
+    if (!localStorage.getItem('cookiesAccepted')) {
+        document.getElementById('cookie-banner').style.display = 'block'; // Mostra o banner
+    }
+
+    // Aceitar cookies
+    document.getElementById('accept-cookies').addEventListener('click', function() {
+        localStorage.setItem('cookiesAccepted', 'true'); // Armazena a aceitação
+        document.getElementById('cookie-banner').style.display = 'none'; // Esconde o banner
+    });
+</script>
+
 
 </body>
 </html>
@@ -228,4 +246,76 @@
             width: 100%;
             background-color: #D8A6D1;
             padding: 10px 0;
-           
+           /* Estilos para o banner de cookies */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #D8A6D1; /* Cor de fundo */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    display: none; /* Inicialmente escondido */
+}
+
+.cookie-banner p {
+    margin: 0;
+    display: inline;
+}
+
+.cookie-banner a {
+    color: white;
+    text-decoration: underline;
+}
+
+.cookie-banner button {
+    background-color: #6A4C9C; /* Cor do botão */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.cookie-banner button:hover {
+    background-color: #4A76A8; /* Cor do botão ao passar o mouse */
+}/* Estilos para o banner de cookies */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #D8A6D1; /* Cor de fundo */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    display: none; /* Inicialmente escondido */
+}
+
+.cookie-banner p {
+    margin: 0;
+    display: inline;
+}
+
+.cookie-banner a {
+    color: white;
+    text-decoration: underline;
+}
+
+.cookie-banner button {
+    background-color: #6A4C9C; /* Cor do botão */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.cookie-banner button:hover {
+    background-color: #4A76A8; /* Cor do botão ao passar o mouse */
+}
