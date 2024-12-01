@@ -13,7 +13,8 @@ if (isset($_COOKIE['usuario_email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body><style>
+<body>
+<style>
     /* Resetando estilos */
 * {
     margin: 0;
@@ -145,14 +146,13 @@ body {
     <header class="navbar">
     <div class="logo">CemFreelas</div>
 
-  <!-- Barra de Pesquisa -->
-<div class="search-bar">
- <form __DIR__= "pesquisar.php" method="POST">
-        <input type="text" name="query" placeholder="Pesquisar...">
-        <button type="submit">Pesquisar</button>
-    </form>
-</div>
-
+    <!-- Barra de Pesquisa -->
+    <div class="search-bar">
+        <form action="pesquisa.php" method="GET" class="search-form">
+            <input type="text" name="query" placeholder="Buscar por freelancers, projetos ou serviços..." required>
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
 
     <!-- Menu de Navegação -->
     <div class="nav-links">

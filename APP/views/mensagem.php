@@ -1,33 +1,65 @@
-    <?php
-    // mensagens.php - Exibição e gestão de mensagens
-    require_once __DIR__ . '/../../db/Database.php';  // Ajuste conforme sua estrutura de diretórios
+<?php
+require_once __DIR__ . '/../../db/Database.php';  // Ajuste conforme sua estrutura de diretórios
+require_once '../controllers/MensagemController.php';
 
-    require_once '../controllers/MensagemController.php';
+$mensagemController = new MensagemController();
 
-    $mensagemController = new MensagemController();
+// Mensagem de sucesso
+$mensagemDeSucesso = "";
 
-    // Lógica de envio de mensagem
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['mensagem'])) {
+// Lógica de envio de mensagem
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['mensagem'])) {
+    try {
+        // Enviar a mensagem
         $mensagemController->enviarMensagem($_POST['mensagem']);
+        // Exibir mensagem de sucesso
+        $mensagemDeSucesso = "Mensagem enviada com sucesso!";
+    } catch (Exception $e) {
+        // Exibir erro em caso de falha
+        $mensagemDeSucesso = "Erro ao enviar a mensagem: " . $e->getMessage();
     }
+}
 
-    // Lógica de exclusão de mensagem
-    if (isset($_GET['excluir_id'])) {
-        $mensagemController->excluirMensagem($_GET['excluir_id']);
-    }
+?>
 
-    $mensagens = $mensagemController->listarMensagens();
-    ?>
-    <h2>Mensagens</h2>
-    <form action="mensagens.php" method="POST">
-        <textarea name="mensagem" required></textarea>
-        <button type="submit">Enviar Mensagem</button>
-    </form>
 
-    <h3>Mensagens Recebidas:</h3>
-    <?php foreach ($mensagens as $mensagem): ?>
-        <div>
-            <p><?php echo $mensagem['conteudo']; ?></p>
-            <a href="mensagens.php?excluir_id=<?php echo $mensagem['id']; ?>">Excluir</a>
-        </div>
-    <?php endforeach; ?>
+<?php if ($mensagemDeSucesso): ?>
+    <p><?php echo $mensagemDeSucesso; ?></p>
+<?php endif; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Enviar Mensagem</title>
+</head>
+<body>
+   <style>
+    /* css/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+.mensagem {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.mensagem-sucesso {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.mensagem-erro {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+   </style> 
+</body>
+</html>
