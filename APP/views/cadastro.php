@@ -5,32 +5,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once '../../APP/controllers/UsuarioController.php';
 
     $nascimento = $_POST['nascimento'];
+    $erro = '';
+
+    // Verifica se o ano de nascimento é 2024
     if (strpos($nascimento, '2024') !== false) {
         $erro = 'Não é permitido cadastrar usuários nascidos no ano de 2024.';
     } else {
-        
-    // Criação da instância da classe com o nome de variável mais intuitivo
-    $usuarioController = new UsuarioController();
+        // Verifica se a senha e a confirmação de senha são iguais
+        if ($_POST['senha'] !== $_POST['confirmar_senha']) {
+            $erro = 'As senhas não coincidem.';
+        } else {
+            // Criação da instância da classe com o nome de variável mais intuitivo
+            $usuarioController = new UsuarioController();
 
-    // Processamento do cadastro (certifique-se de que o nome do método esteja correto)
-    $usuario = $usuarioController->CadastrarUsuario($_POST['nome'], $_POST['email'], $_POST['nascimento'], $_POST['tipo_usuario'], $_POST['senha']);
-    
-    if ($usuario) { 
-        // Se o cadastro for bem-sucedido, redireciona para o login
-        header('Location: login.php');
-        exit();
-    } else {
-        // Se ocorrer algum erro no cadastro
-        $erro = 'Erro ao cadastrar. Tente novamente.';
-    }
+            // Processamento do cadastro
+            $usuario = $usuarioController->CadastrarUsuario(
+                $_POST['nome'], 
+                $_POST['email'], 
+                $_POST['nascimento'], 
+                $_POST['tipo_usuario'], 
+                $_POST['senha']
+            );
+            
+            if ($usuario) { 
+                // Se o cadastro for bem-sucedido, redireciona para o login
+                header('Location: login.php');
+                exit();
+            } else {
+                // Se ocorrer algum erro no cadastro
+                $erro = 'Erro ao cadastrar. Tente novamente.';
+            }
+        }
     }
 }
 ?>
-
-
-<?php if (isset($erro)): ?>
-    <p style="color: red;"><?php echo $erro; ?></p>
-<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -64,10 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            margin: 50px 50px 50px 450px;  /* Ajuste do espaçamento */
+            margin: 50px auto;  /* Centraliza horizontalmente */
             text-align: center;
-            align-items: center;
-            justify-content: center; /* Centraliza verticalmente */
         }
 
         h1 {
@@ -152,7 +158,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container">
     <h1>Cadastro</h1>
 
-    <form action="processar_cadastro.php" method="POST">
+    <?php if (isset($erro) && $erro): ?>
+        <p style="color: red;"><?php echo $erro; ?></p>
+    <?php endif; ?>
+
+    <form action="cadastro.php" method="POST">
         <label for="nome">Nome de Usuário:</label>
         <input type="text" name="nome" required>
 

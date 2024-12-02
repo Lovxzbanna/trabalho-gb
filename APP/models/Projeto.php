@@ -1,35 +1,47 @@
 <?php
 class Projeto {
     private $conn;
-    private $table = 'projetos'; // Nome da tabela no banco de dados
+    private $table_name = "projetos";
 
-    // Propriedades da tabela
     public $projeto_id;
-    public $nome_produto;
+    public $titulo;
     public $descricao;
+    public $preco;
 
-    // Construtor da classe
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    // Método para buscar os projetos
-    public function buscarProjetos($query) {
-        // Criando o comando SQL de pesquisa
-        $sql = "SELECT * FROM " . $this->table . " WHERE nome_produto LIKE :query OR descricao LIKE :query";
+    // Função para buscar projetos pelo nome
+    public function buscarProjetosPorNome($nome) {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE titulo LIKE :titulo";
+        $stmt = $this->conn->prepare($query);
 
-        // Preparando a consulta
-        $stmt = $this->conn->prepare($sql);
+        // Adiciona o '%' antes e depois do nome para buscar qualquer projeto que contenha esse nome
+        $nome = "%" . $nome . "%";
+        $stmt->bindParam(":titulo", $nome);
 
-        // Bind do parâmetro
-        $query = "%{$query}%"; // Para fazer a pesquisa com LIKE
-        $stmt->bindParam(':query', $query);
-
-        // Executando a consulta
         $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retorna os projetos encontrados
+    }
 
-        // Retorna os resultados
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Função para listar todos os projetos
+    public function listarProjetos() {
+        $query = "SELECT * FROM " . $this->table_name;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Retorna todos os projetos
+    }
+
+    // Função para obter um projeto específico
+    public function obterProjeto() {
+        $query = "SELECT * FROM " . $this->table_name . " WHERE projeto_id = :projeto_id";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":projeto_id", $this->projeto_id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Retorna um projeto específico
     }
 }
+
+
 ?>

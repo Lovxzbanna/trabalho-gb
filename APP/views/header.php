@@ -146,14 +146,6 @@ body {
     <header class="navbar">
     <div class="logo">CemFreelas</div>
 
-    <!-- Barra de Pesquisa -->
-    <div class="search-bar">
-        <form action="pesquisa.php" method="GET" class="search-form">
-            <input type="text" name="query" placeholder="Buscar por freelancers, projetos ou serviços..." required>
-            <button type="submit">Buscar</button>
-        </form>
-    </div>
-
     <!-- Menu de Navegação -->
     <div class="nav-links">
         <a href="sobre.php">Sobre</a>

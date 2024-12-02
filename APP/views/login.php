@@ -1,41 +1,48 @@
-<?php 
+<?php
 // login.php - Formulário de login e processamento
+
+// Verifique se o método é POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Lógica de validação de login aqui
+    // Incluir a conexão com o banco de dados
     require_once '../../db/Database.php';  // Conexão com o banco de dados
-    require_once '../../app/controllers/UsuarioController.php';
+    require_once '../../app/controllers/UsuarioController.php';  // Incluir o controlador
 
-    $usuarioController = new UsuarioController();
+    // Criar instância de conexão com o banco de dados
+    $database = new Database();
+    $conn = $database->getConnection();  // Pega a conexão do banco de dados
+
+    // Passar a conexão para o UsuarioController
+    $usuarioController = new UsuarioController($conn);  // Passando a conexão para o controlador
     
-    // Valida o login e obtém os dados do usuário
-    $usuario = $usuarioController->validarLogin($_POST['email'],$_POST['senha']);
+    // Validar o login
+    $usuario = $usuarioController->validarLogin($_POST['email'], $_POST['senha']);
+    
     if ($usuario) {
-        // Se o login for válido, verifica o tipo de usuário e redireciona
-        session_start(); // Inicia a sessão
-        $_SESSION['user_id'] = $usuario['id']; // Salva o id do usuário na sessão
-        $_SESSION['user_tipo'] = $usuario['tipo']; // Salva o tipo de usuário (cliente ou freelancer)
-
-        // Redireciona para o painel correto
+        // Se o login for válido, inicia a sessão
+        session_start(); 
+        $_SESSION['user_id'] = $usuario['id'];  // Salva o id do usuário na sessão
+        $_SESSION['user_tipo'] = $usuario['tipo'];  // Salva o tipo de usuário (cliente ou freelancer)
+        
+        // Redireciona para o painel baseado no tipo de usuário
         if ($usuario['tipo'] == 'freelancer') {
-            header('Location: painel_freelancer.php');
+            header('Location: painel_freelancer.php');  // Para freelancers
         } else if ($usuario['tipo'] == 'cliente') {
-            header('Location: painel_cliente.php');
+            header('Location: painel_cliente.php');  // Para clientes
         } else {
-            // Se o tipo de usuário for inválido, redireciona para a página inicial ou erro
-            header('Location: index.php');
+            header('Location: index.php');  // Para tipos inválidos
         }
-        exit(); // Finaliza o script após o redirecionamento
+        exit();  // Finaliza o script após o redirecionamento
     } else {
-        // Se a validação falhar
+        // Se a validação falhar, exibe mensagem de erro
         $erro = 'Email ou senha incorretos!';
     }
 }
 ?>
 
-
 <?php if (isset($erro)): ?>
     <p style="color: red;"><?php echo $erro; ?></p>
 <?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -126,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         /* Estilos para links */
         a {
-            color: #D 8A6D1; /* Rosa claro */
+            color: #D8A6D1; /* Rosa claro */
             text-decoration: none;
             margin-top: 20px;
         }

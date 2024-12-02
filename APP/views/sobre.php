@@ -1,12 +1,13 @@
-<?php 
-include 'header.php'?> <!-- Inicia a sessão PHP -->
+<?php include 'header.php'; ?> <!-- Incluindo o cabeçalho PHP -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre nós - CemFreelas</title>
+    <title>Sobre - CemFreelas</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Link para ícones -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         /* Reset de estilos padrões */
         * {
@@ -22,7 +23,7 @@ include 'header.php'?> <!-- Inicia a sessão PHP -->
             color: #333;
             padding: 0;
             min-height: 100vh;
-            margin-top: 0px; /* Espaço para o navbar fixo */
+            margin-top: 0px;
         }
 
         /* Estilos de Navegação */
@@ -40,22 +41,6 @@ include 'header.php'?> <!-- Inicia a sessão PHP -->
             font-weight: bold;
         }
 
-        .search-bar input {
-            padding: 8px;
-            margin-right: 10px;
-            border: none;
-            border-radius: 5px;
-            width: 200px;
-        }
-
-        .search-bar button {
-            padding: 8px 16px;
-            background-color: #D8A6D1;
-            border: none;
-            border-radius: 5px;
-            color: white;
-        }
-
         .nav-links a {
             margin: 0 10px;
             text-decoration: none;
@@ -65,41 +50,6 @@ include 'header.php'?> <!-- Inicia a sessão PHP -->
 
         .nav-links a:hover {
             color: #D8A6D1;
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                width: 100%;
-                background-color: #D8A6D1;
-                padding: 10px 0;
-                position: absolute;
-                top: 60px;
-                left: 0;
-            }
-
-            .nav-links.active {
-                display: block;
-            }
-
-            .hamburger-menu {
-                cursor: pointer;
-                display: block;
-            }
-
-            .hamburger-menu div {
-                width: 30px;
-                height: 4px;
-                background-color: white;
-                margin: 5px 0;
-            }
-
-            .nav-links {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
         }
 
         /* Container principal */
@@ -114,8 +64,8 @@ include 'header.php'?> <!-- Inicia a sessão PHP -->
         }
 
         /* Títulos */
-        h2, h3, h4 {
-            color: #FF5D8F; /* Cor de destaque rosa para títulos */
+        h2, h3 {
+            color: #6A4C9C; /* Roxo para os títulos */
             margin-bottom: 20px;
             font-weight: bold;
         }
@@ -128,112 +78,73 @@ include 'header.php'?> <!-- Inicia a sessão PHP -->
             font-size: 28px;
         }
 
-        h4 {
-            font-size: 22px;
-        }
-
-        /* Parágrafos */
-        p {
+        /* Texto sobre o site */
+        .about-text {
             font-size: 18px;
             line-height: 1.6;
-            margin-bottom: 25px;
+            margin-top: 20px;
         }
 
-        /* Listas */
-        ul {
-            list-style-type: disc;
-            margin-left: 20px;
+        .about-text p {
+            margin-bottom: 20px;
         }
 
-        ul li {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 10px;
-        }
-
-        /* Estilo para links */
-        a {
-            color: #FF5D8F; /* Cor rosa para links */
+        .about-text a {
+            color: #6A4C9C;
             text-decoration: none;
-            font-weight: 500;
         }
 
-        a:hover {
+        .about-text a:hover {
             text-decoration: underline;
         }
 
-        /* Informações de Contato e Redes Sociais */
-        .contact-info, .social-links {
-            font-size: 18px;
-            margin-top: 30px;
-        }
-
-        .contact-info p, .social-links p {
-            margin: 10px 0;
-        }
-
-        .social-links ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .social-links ul li {
-            margin: 5px 0;
-        }
-
-        .social-links ul li a {
-            color: #FF5D8F;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .social-links ul li a:hover {
-            text-decoration: underline;
-        }
-
-        
     </style>
 </head>
 <body>
 
     <!-- Conteúdo Principal -->
     <div class="container">
-        <h2>Bem-vindo ao CemFreelas: A Plataforma Perfeita para Freelancers e Clientes!</h2>
-        <p>O <strong>CemFreelas</strong> é um site inovador que conecta freelancers e clientes, proporcionando um ambiente dinâmico onde projetos podem ser propostos, contratados e avaliados de forma simples e segura. Se você é freelancer e busca novos desafios, ou se você é cliente em busca de profissionais para realizar seus projetos, o CemFreelas é o lugar certo para você!</p>
+        <h2>Sobre o CemFreelas</h2>
+        <p>O <b>CemFreelas</b> é uma plataforma criada para conectar freelancers com empresas e indivíduos que buscam serviços de alta qualidade de maneira rápida e prática. Nosso objetivo é facilitar a contratação e oferecer um espaço seguro e eficiente para que ambos os lados possam negociar, colaborar e crescer.</p>
 
-        <p>Nosso sistema é estruturado para atender a diferentes tipos de usuários, com funcionalidades voltadas para facilitar a criação de projetos, comunicação entre as partes e uma avaliação transparente das experiências. Abaixo, explicamos como o site funciona para cada tipo de usuário.</p>
+        <div class="about-text">
+            <h3>Missão</h3>
+            <p>A missão do CemFreelas é proporcionar uma experiência fluida e sem complicações para quem precisa de serviços de freelancers especializados. Buscamos transformar o mercado de trabalho, conectando profissionais de diversas áreas a projetos inovadores, com total transparência e segurança para todas as partes envolvidas.</p>
 
-        <h3>Para o Usuário:</h3>
-        <p>Se você está visitando o CemFreelas pela primeira vez, seja como freelancer ou cliente, veja o que oferecemos:</p>
-        <ul>
-            <li><strong>Criação de Projetos:</strong> Crie um projeto detalhado, defina as suas expectativas e aguarde as propostas dos freelancers.</li>
-            <li><strong>Busca por Freelancers:</strong> Navegue por perfis de freelancers com base nas suas habilidades, experiências e avaliações.</li>
-            <li><strong>Transações Seguras:</strong> Acesse uma plataforma de pagamento segura, garantindo que todos os processos sejam transparentes.</li>
-        </ul>
+            <h3>Visão</h3>
+            <p>Nosso desejo é nos tornar a principal plataforma de freelancers no Brasil, sendo reconhecidos pela qualidade dos serviços oferecidos e pela confiança de nossos usuários. Trabalhamos para ser a ponte entre talentos excepcionais e clientes que buscam soluções criativas para seus negócios.</p>
 
-        <h4>Redes Sociais e Contato:</h4>
-        <div class="social-links">
+            <h3>Como Funciona?</h3>
+            <p>Se você é freelancer, pode criar um perfil e começar a se candidatar a projetos de empresas que buscam suas habilidades. Se você é uma empresa ou indivíduo em busca de serviços, basta publicar um projeto e escolher o freelancer que melhor se adequa às suas necessidades. O CemFreelas facilita todo o processo de negociação e pagamento, proporcionando segurança para ambos os lados.</p>
+
+            <h3>Benefícios para Freelancers</h3>
             <ul>
-                <li><a href="#">Facebook</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">LinkedIn</a></li>
+                <li>Acesso a uma vasta gama de projetos de diferentes áreas.</li>
+                <li>Plataforma fácil de usar, com ferramentas que ajudam na gestão de suas propostas.</li>
+                <li>Segurança no pagamento, com garantia de que os acordos serão cumpridos.</li>
+                <li>Visibilidade e oportunidades de crescer como profissional.</li>
             </ul>
-        </div>
 
-        <div class="contact-info">
-            <p>Email: contato@cemfreelas.com.br</p>
-            <p>Telefone: (11) 99999-9999</p>
+            <h3>Benefícios para Clientes</h3>
+            <ul>
+                <li>Encontre profissionais qualificados para seu projeto de forma rápida.</li>
+                <li>Negocie diretamente com os freelancers, ajustando os detalhes de seu projeto.</li>
+                <li>Tenha segurança nos pagamentos, com a garantia de que o trabalho será entregue conforme combinado.</li>
+                <li>Receba serviços de alta qualidade de freelancers especializados em diversas áreas.</li>
+            </ul>
+
+            <p>Quer saber mais ou tirar dúvidas? <a href="contato.php">Entre em contato conosco!</a></p>
         </div>
     </div>
 
-    
     <script>
         function toggleMenu() {
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('show');
         }
     </script>
-<?php include 'footer.php'?>    
+
+<?php include 'footer.php'; ?> 
+
 </body>
 </html>

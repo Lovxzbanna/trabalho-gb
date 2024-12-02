@@ -1,47 +1,34 @@
 <?php
 class UsuarioController {
-    // Método para cadastrar o usuário
-    public function CadastrarUsuario($nome, $email, $nascimento, $tipo_usuario, $senha) {
-        require_once '../../db/Database.php';  // Conexão com o banco de dados
-        include '../models/Usuario.php';
-        $pdo = (new Database)->getConnection();  // Supondo que você tenha uma classe de conexão com o banco
+    private $conn;
 
-        // SQL para inserir os dados do usuário no banco
-        $sql = "INSERT INTO usuarios (nome, email, nascimento, tipo_usuario, senha) 
-                VALUES (:nome, :email, :nascimento, :tipo_usuario, :senha)";
-        
-        // Preparando a consulta
-        $stmt = $pdo->prepare($sql);
+    // Construtor para inicializar a conexão com o banco de dados
+    public function __construct($conn) {
+        $this->conn = $conn;
+    }
 
-        // Bind dos parâmetros
-        $stmt->bindParam(':nome', $nome);
+    // Função para validar o login do usuário
+    public function validarLogin($email, $senha) {
+        // Consulta para buscar o usuário pelo email
+        $query = "SELECT * FROM usuarios WHERE email = :email";
+        $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':nascimento', $nascimento);
-        $stmt->bindParam(':tipo_usuario', $tipo_usuario);
-        $stmt->bindParam(':senha', $senha);  // Aqui é recomendável fazer a criptografia, mas vou manter simples
-
-        // Executa a consulta
         $stmt->execute();
 
-        // Retorna verdadeiro se o cadastro foi bem-sucedido
+        // Verifica se o usuário existe
         if ($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;  // Caso contrário, retorna falso
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Verifica se a senha informada corresponde à senha armazenada
+            if (trim($usuario['senha']) == trim($senha)) {
+                return $usuario; // Retorna os dados do usuário
+            } else {
+                // Se a senha estiver incorreta
+                return false;
+            }
         }
-    }
-    public function validarLogin($email,$senha){
-        $banco = (new Database())->getConnection();
 
-        $sql = "SELECT * from usuarios where email = :e and senha = :s";
-        $stmn = $banco->prepare($sql);
-
-        $stmn->bindValue("e",$email);
-        $stmn->bindValue("s",$senha);
-
-        $stmn->execute();
-
-        return $stmn->fetch(PDO::FETCH_ASSOC);
+        return false; // Se o usuário não existir
     }
 }
 ?>

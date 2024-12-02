@@ -1,7 +1,6 @@
 <?php
 require_once '../models/Projeto.php';
 require_once '../../db/Database.php';
-
 class ProjetoController {
     private $db;
     private $projeto;
@@ -12,29 +11,21 @@ class ProjetoController {
         $this->projeto = new Projeto($this->db);
     }
 
-    // Função para criar projeto
-    public function criarProjeto($titulo, $descricao, $preco) {
-        $this->projeto->titulo = $titulo;
-        $this->projeto->descricao = $descricao;
-        $this->projeto->preco = $preco;
-        if ($this->projeto->criarProjeto()) {
-            echo "Projeto criado com sucesso!";
-        } else {
-            echo "Erro ao criar projeto.";
-        }
-    }
-
-    // Função para listar projetos
+    // Função para listar todos os projetos
     public function listarProjetos() {
-        $projetos = $this->projeto->listarProjetos();
-        return $projetos;
+        return $this->projeto->listarProjetos();
     }
 
-    // Função para obter um projeto específico pelo ID
-    public function obterProjeto($id) {
-        $this->projeto->id = $id;
-        $projeto = $this->projeto->obterProjeto();  // Usa o método obterProjeto do modelo Projeto
-        return $projeto;
+    // Função para buscar projetos pelo nome
+    public function buscarProjetosPorNome($nome) {
+        return $this->projeto->buscarProjetosPorNome($nome);
+    }
+
+    // Função para obter um projeto específico
+    public function obterProjeto($projeto_id) {
+        $this->projeto->projeto_id = $projeto_id;
+        return $this->projeto->obterProjeto();
     }
 }
+
 ?>

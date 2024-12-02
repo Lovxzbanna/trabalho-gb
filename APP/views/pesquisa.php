@@ -1,31 +1,26 @@
 <?php
-
-// Incluir as classes
+// Incluir as classes necessárias
 require_once '../../db/Database.php';
-require_once '../models/Projeto.php';
+require_once '../controllers/ProjetoController.php';
 require_once '../models/Usuario.php';
 
-// Criar instância da classe de banco de dados e conectar
+// Criar instância do controlador de projetos e conectar ao banco de dados
 $database = new Database();
 $conn = $database->getConnection();
-
-// Obter o termo de busca
-$query = isset($_GET['query']) ? $_GET['query'] : '';
 
 // Verificar se o usuário está logado
 $usuario_nome = 'Visitante';
 if (isset($_SESSION['usuario_email'])) {
     $usuario_email = $_SESSION['usuario_email'];
     $usuario = new Usuario($conn);
-    $usuario_nome = $usuario->obterNomePorEmail($usuario_email);  // Aqui não deverá mais dar erro
+    $usuario_nome = $usuario->obterNomePorEmail($usuario_email);  // Recupera o nome do usuário
 }
 
-// Buscar os projetos
-$projeto = new Projeto($conn);
-$resultados = [];
-if ($query) {
-    $resultados = $projeto->buscarProjetos($query);  // Chama o método buscarProjetos()
-}
+// Criar instância do controlador de projetos
+$projetoController = new ProjetoController();
+
+// Obter a lista de todos os projetos
+$projetos = $projetoController->listarProjetos();
 
 ?>
 
@@ -34,13 +29,13 @@ if ($query) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados da Pesquisa - CemFreelas</title>
+    <title>Lista de Projetos - CemFreelas</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <style>
         /* Estilos personalizados */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
+            background-color: #f1e5f7; /* Cor de fundo suave em tom de roxo */
             padding-top: 0;
         }
 
@@ -50,7 +45,7 @@ if ($query) {
 
         .no-results {
             font-size: 1.2em;
-            color: #555;
+            color: #6a4c9c; /* Roxo mais escuro */
             margin-top: 20px;
         }
 
@@ -67,19 +62,19 @@ if ($query) {
         }
 
         .box h3 {
-            color: #4a76a8;
+            color: #6a4c9c; /* Roxo para os títulos */
             font-size: 1.2em;
             margin-bottom: 10px;
         }
 
         .box p {
-            color: #666;
+            color: #6a4c9c; /* Roxo mais suave para o texto */
             font-size: 1em;
             margin-bottom: 15px;
         }
 
         .button.is-link {
-            background-color: #4a76a8;
+            background-color: #6a4c9c; /* Roxo para o botão */
             color: #fff;
             font-size: 1em;
             padding: 10px 20px;
@@ -87,11 +82,11 @@ if ($query) {
         }
 
         .button.is-link:hover {
-            background-color: #3a5a7e;
+            background-color: #542a76; /* Roxo escuro ao passar o mouse */
         }
 
         .title {
-            color: #4a76a8;
+            color: #6a4c9c; /* Roxo para o título principal */
         }
     </style>
 </head>
@@ -103,28 +98,27 @@ if ($query) {
 
 <!-- Conteúdo Principal -->
 <div class="container">
-    <h2 class="title">Resultados para: "<?php echo htmlspecialchars($query); ?>"</h2>
+    <h2 class="title">Todos os Projetos</h2>
 
-    <?php if (count($resultados) > 0): ?>
+    <?php if (count($projetos) > 0): ?>
         <div class="columns is-multiline">
-            <?php foreach ($resultados as $projeto): ?>
+            <?php foreach ($projetos as $projeto): ?>
                 <div class="column is-one-third">
                     <div class="box">
-                        <h3><?php echo htmlspecialchars($projeto['nome_produto']); ?></h3>
+                        <h3><?php echo htmlspecialchars($projeto['titulo']); ?></h3>
                         <p><?php echo htmlspecialchars($projeto['descricao']); ?></p>
                         <?php if (isset($_SESSION['usuario_email'])): ?>
                             <a href="../login/detalhes.php?projeto_id=<?php echo $projeto['projeto_id']; ?>" class="button is-link">Ver detalhes</a>
                         <?php else: ?>
-                            <p>Para ver mais detalhes, <a href="../login/login.php" class="button is-link">faça login</a>.</p>
+                            <p>Para ver mais detalhes, <a href="login.php" class="button is-link">faça login</a>.</p>
                         <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
     <?php else: ?>
-        <p class="no-results">Nenhum resultado encontrado para "<?php echo htmlspecialchars($query); ?>"</p>
+        <p class="no-results">Nenhum projeto encontrado.</p>
     <?php endif; ?>
-    
 </div>
 
 <!-- Inclusão do footer -->

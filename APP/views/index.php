@@ -41,6 +41,7 @@
 
         img {
             max-width: 100%;
+            height: auto;
             border-radius: 10px;
             object-fit: cover;
         }
@@ -113,8 +114,8 @@
         }
 
         .welcome-section .profile-pic {
-            width: 100px;
-            height: 100px;
+            width: 80px; /* Ajustado para a imagem de perfil */
+            height: 80px;
             border-radius: 50%;
             margin-right: 20px;
             border: 2px solid #fff;
@@ -141,8 +142,8 @@
         }
 
         .how-it-works .steps img {
-            width: 100px;
-            height: 100px;
+            width: 80px; /* Ajustado para as imagens das etapas */
+            height: 80px;
         }
 
         /* Depoimentos */
@@ -160,8 +161,8 @@
         }
 
         .testimonial img {
-            width: 100px;
-            height: 100px;
+            width: 80px; /* Ajuste para as imagens dos depoimentos */
+            height: 80px;
             border-radius: 50%;
             margin-right: 20px;
             border: 2px solid #fff;
@@ -178,25 +179,135 @@
             color: #ddd;
         }
 
+        /* Seção de Serviços */
+        .services {
+            margin-top: 40px;
+            display: flex; /* Usando Flexbox para colocar as imagens lado a lado */
+            justify-content: space-between; /* Distribuindo o espaço entre os serviços */
+            gap: 15px; /* Reduzi o gap entre os serviços */
+            flex-wrap: wrap; /* Garante que os serviços se ajustem em telas menores */
+        }
+
+        .service {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            width: 23%; /* Cada serviço ocupará 23% da largura disponível */
+            box-sizing: border-box;
+            transition: transform 0.3s ease-in-out; /* Transição suave */
+        }
+
+        .service:hover {
+            transform: translateY(-5px); /* Efeito de hover */
+        }
+
+        .service img {
+            width: 100px; /* Ajustado para a largura das imagens */
+            height: 100px; /* Ajustado para a altura das imagens */
+            margin-bottom: 10px; /* Diminui o espaço entre a imagem e o texto */
+            border-radius: 8px;
+        }
+
+        .service h3 {
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        .service p {
+            color: #e0e0e0;
+        }
+
         /* Responsividade para dispositivos móveis */
+        @media (max-width: 1024px) {
+            .service {
+                width: 48%; /* Ajuste para 2 colunas em telas médias */
+            }
+        }
+
         @media (max-width: 768px) {
-            .steps {
+            .services {
                 flex-direction: column;
+                align-items: center; /* Centraliza os serviços */
+            }
+
+            .service {
+                width: 80%; /* Cada serviço ocupará 80% da largura da tela */
+                margin-bottom: 20px; /* Reduz o espaçamento entre os serviços */
+            }
+        }
+
+        /* Seção Fale Conosco */
+        .contact {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact input, .contact textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #fff;
+            color: #333;
+            width: 100%;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact input:focus, .contact textarea:focus {
+            outline: none;
+            border-color: #6a11cb;
+        }
+
+        .contact textarea {
+            resize: vertical; /* Permite redimensionamento vertical da textarea */
+            min-height: 150px; /* Altura mínima */
+        }
+
+        .contact button {
+            padding: 14px;
+            background-color: #6a11cb;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s ease-in-out;
+        }
+
+        .contact button:hover {
+            background-color: #8a2be2;
+            transform: scale(1.05);
+        }
+
+        .contact button:active {
+            background-color: #7a1bbf;
+            transform: scale(1);
+        }
+
+        @media (max-width: 768px) {
+            .contact form {
                 align-items: center;
             }
 
-            .step {
-                width: 100%;
-                margin-bottom: 20px;
-            }
-
-            .search-bar .search-form {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .search-bar button {
-                width: 100%;
+            .contact input, .contact textarea {
+                width: 90%; /* Ajuste para o formulário ocupar mais largura */
             }
         }
     </style>
@@ -205,12 +316,7 @@
 <main class="main-content">
     <div class="container">
         <!-- Barra de Pesquisa -->
-        <section class="search-bar">
-            <form action="pesquisa.php" method="GET" class="search-form">
-                <input type="text" name="query" placeholder="Buscar por freelancers, projetos ou serviços..." required>
-                <button type="submit">Buscar</button>
-            </form>
-        </section>
+        
 
         <!-- Seção de boas-vindas -->
         <section class="welcome-section">
@@ -274,51 +380,28 @@
             <div class="service">
                 <img src="projetos/desenvolvimento-web.avif" alt="Desenvolvimento Web">
                 <h3>Desenvolvimento Web</h3>
-                <p>Construa sites dinâmicos e intuitivos para engajar seu público.</p>
+                <p>Criamos sites e aplicações personalizadas para o seu negócio.</p>
             </div>
+
             <div class="service">
-                <img src="projetos/redacao.jpg" alt="Redação">
-                <h3>Redação e Conteúdo</h3>
-                <p>Obtenha textos otimizados e criativos para atrair e informar seu público.</p>
-            </div>
-            <div class="service">
-                <img src="projetos/marketing.avif" alt="Marketing Digital">
-                <h3>Marketing Digital</h3>
-                <p>Crie estratégias eficazes para aumentar sua visibilidade e alcançar resultados.</p>
+                <img src="projetos/marketing.avif" alt="Edição de Vídeo">
+                <h3>Edição de Vídeo</h3>
+                <p>Edição criativa para vídeos promocionais, tutoriais e muito mais.</p>
             </div>
         </section>
 
-        <!-- Contato -->
+        <!-- Fale Conosco -->
         <section class="contact">
             <h2>Fale Conosco</h2>
             <form action="mensagem.php" method="POST">
                 <input type="text" name="nome" placeholder="Seu Nome" required>
-                <input type="email" name="email" placeholder="Seu Email" required>
-                <textarea name="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
-                <button type="submit">Enviar Mensagem</button>
+                <input type="email" name="email" placeholder="Seu E-mail" required>
+                <textarea name="mensagem" placeholder="Sua Mensagem" required></textarea>
+                <button type="submit">Enviar</button>
             </form>
         </section>
     </div>
 </main>
-
-<script>
-    document.querySelector("form").addEventListener("submit", function(event) {
-        const nome = document.querySelector("input[name='nome']").value;
-        const email = document.querySelector("input[name='email']").value;
-        const mensagem = document.querySelector("textarea[name='mensagem']").value;
-
-        // Depuração - Verificar os valores capturados
-        console.log("Nome:", nome);
-        console.log("Email:", email);
-        console.log("Mensagem:", mensagem);
-
-        // Verifica se algum campo está vazio
-        if (!nome || !email || !mensagem) {
-            event.preventDefault(); // Impede o envio do formulário
-            alert("Por favor, preencha todos os campos.");
-        }
-    });
-</script>
-
 </body>
 </html>
+<?php include 'footer.php'; ?>   

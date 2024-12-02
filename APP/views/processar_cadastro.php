@@ -1,41 +1,32 @@
-<?php 
-// processar_cadastro.php - Processamento do cadastro
+<?php
+// processar_cadastro.php
 
-// Verifica se o formulário foi enviado via POST
+require_once '../../db/Database.php'; // Conexão com o banco
+require_once '../../app/controllers/UsuarioController.php'; // Controlador de usuário
+
+$database = new Database();
+$conn = $database->getConnection();  // Obtém a conexão com o banco de dados
+
+// Criar instância da classe UsuarioController
+$usuarioController = new UsuarioController($conn);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once '../../db/Database.php';  // Conexão com o banco de dados
-    require_once '../../APP/controllers/UsuarioController.php';
-
-    // Recupera os dados do formulário
+    // Pega os dados do formulário de cadastro
     $nome = $_POST['nome'];
     $email = $_POST['email'];
-    $nascimento = $_POST['nascimento'];
-    $tipo_usuario = $_POST['tipo_usuario'];
     $senha = $_POST['senha'];
-    $confirmar_senha = $_POST['confirmar_senha'];
 
-    // Verifica se as senhas coincidem
-    if ($senha !== $confirmar_senha) {
-        $erro = 'As senhas não coincidem!';
+    // Chama o método para registrar o usuário
+    $resultado = $usuarioController->registrarUsuario($nome, $email, $senha);
+
+    // Verifica se o resultado é verdadeiro (sucesso) ou uma mensagem de erro
+    if ($resultado === true) {
+        echo "Cadastro realizado com sucesso!";
+        // Redireciona para a página de login ou outra página
+    } elseif ($resultado === "Email já está em uso!") {
+        echo "Erro: O e-mail já está em uso. Tente outro.";
     } else {
-        // Instancia o controlador de usuário
-        $usuarioController = new UsuarioController();
-        
-        // Tenta cadastrar o usuário
-        $usuario = $usuarioController->cadastrarUsuario($nome, $email, $nascimento, $tipo_usuario, $senha);
-
-        if ($usuario) {
-            // Se o cadastro for bem-sucedido, redireciona para a página de login
-            header('Location: login.php');
-            exit();
-        } else {
-            // Se o cadastro falhar
-            $erro = 'Erro ao cadastrar. Tente novamente.';
-        }
+        echo "Erro ao cadastrar o usuário. Tente novamente.";
     }
 }
 ?>
-
-<?php if (isset($erro)): ?>
-    <p style="color: red;"><?php echo $erro; ?></p>
-<?php endif; ?>

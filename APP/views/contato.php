@@ -1,310 +1,164 @@
-<?php include 'header.php' ?>
+<?php include 'header.php'; ?> <!-- Incluindo o cabeçalho PHP -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fale Conosco - CemFreelas</title>
+    <title>Contato - CemFreelas</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Link para ícones -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
-        /* Resetando estilos */
+        /* Reset de estilos padrões */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* Corpo da Página */
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #4A76A8, #D8A6D1); /* Gradiente rosa e roxo */
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #4A76A8, #6A4C9C, #D8A6D1); /* Gradiente azul, roxo e rosa */
             color: #333;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Centraliza a página */
+            padding: 0;
             min-height: 100vh;
+            margin-top: 0px;
         }
 
-        /* Header */
-        header.navbar {
-            width: 100%; /* Ocupa toda a largura da tela */
-            background-color: #6A4C9C; /* Cor roxa */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 10px 20px; /* Adiciona espaçamento nas laterais */
-            position: fixed; /* Fixa o cabeçalho no topo */
-            top: 0; /* Fixa no topo */
-            left: 0; /* Fixa na borda esquerda */
-            z-index: 1000; /* Garante que o cabeçalho fique acima de outros elementos */
+        /* Estilos de Navegação */
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s ease;
-        }
-
-        header.navbar .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff; /* Cor branca para o logo */
-            text-decoration: none;
-        }
-
-        header.navbar .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        header.navbar .nav-links a {
-            color: #fff; /* Cor branca para os links */
-            text-decoration: none;
-            font-size: 16px;
-        }
-
-        header.navbar .nav-links a:hover {
-            color: #D8A6D1; /* Cor laranja ao passar o mouse */
-        }
-
-        /* Barra de pesquisa */
-        header .search-bar {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .search-bar input {
-            padding: 8px;
-            margin-right: 10px;
-            border: none;
-            border-radius: 5px;
-            width: 200px;
-        }
-
-
-        header .search-bar input[type="text"]:focus {
-            border-color: #FF7F50; /* Laranja */
-        }
-
-        .search-bar button {
-            padding: 8px 16px;
-            background-color: #D8A6D1;
-            border: none;
-            border-radius: 5px;
+            background-color: #6A4C9C;
+            padding: 20px;
             color: white;
         }
 
-        header .search-bar button:hover {
-            background-color: #FF7F50; /* Laranja */
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
         }
 
-        /* Menu hamburguer (responsivo) */
-        .hamburger-menu {
-            display: none;
-            cursor: pointer;
-            flex-direction: column;
-            gap: 5px;
+        .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
         }
 
-        .hamburger-menu div {
-            width: 25px;
-            height: 3px;
-            background-color: #fff; /* Cor branca para as linhas do hamburguer */
-        }
-
-        /* Responsividade: exibe o menu hamburguer em telas menores */
-        @media (max-width: 768px) {
-            header.navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            header.navbar .nav-links {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                width: 100%;
-            }
-
-            .hamburger-menu {
-                display: flex;
-            }
-
-            /* Exibe o menu de navegação em telas menores quando a classe 'active' for adicionada */
-            .nav-links.active {
-                display: block;
-            }
-
-            .nav-links {
-                display: none; /* Esconde o menu inicialmente */
-                width: 100%;
-                padding-left: 20px;
-            }
-        }
-
-        /* Resetando estilos para o corpo da página */
-        body {
-            padding-top: 90px; /* Espaço para o cabeçalho fixo */
+        .nav-links a:hover {
+            color: #D8A6D1;
         }
 
         /* Container principal */
         .container {
             width: 100%;
-            max-width: 900px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 40px;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Títulos */
+        h2, h3 {
+            color: #6A4C9C; /* Roxo para os títulos */
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        h2 {
+            font-size: 32px;
+        }
+
+        h3 {
+            font-size: 28px;
+        }
+
+        /* Informações de Contato */
+        .contact-info {
             margin-top: 30px;
         }
 
-        h1 {
-            font-size: 30px;
-            color: #3b3f47;
-            margin-bottom: 20px;
-            text-align: center;
+        .contact-info p {
+            font-size: 18px;
         }
 
-        /* Formulário de contato */
-        form {
+        .contact-info p a {
+            color: #6A4C9C; /* Roxo para os links */
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-info p a:hover {
+            text-decoration: underline;
+        }
+
+        /* Redes Sociais */
+        .social-icons {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            align-items: center;
+            margin-top: 30px;
         }
 
-        label {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"], input[type="email"], textarea {
-            padding: 12px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            width: 100%;
-            box-sizing: border-box;
-            background-color: #f9f9f9;
-            transition: all 0.3s ease;
-        }
-
-        input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
-            border-color: #FF7F50; /* Laranja */
-            background-color: #ffffff;
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        button {
-            padding: 12px 20px;
-            background-color: pink ; /* Laranja */
-            width: 50%;
-            color: black;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: purple ; /* Laranja escuro */
-        }
-
-        /* Estilos para os links */
-        a {
-            color: #FF7F50; /* Laranja */
+        .social-icons a {
+            color: black; /* Preto para os links */
+            font-size: 18px;
+            margin: 10px;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
 
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Informações de contato */
-        .contact-info, .social-links {
-            margin-top: 40px;
-        }
-
-        .contact-info p, .social-links p {
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-
-        .social-links ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .social-links li {
-            margin-bottom: 8px;
-        }
-
-        .social-links a {
-            font-size: 16px;
-            color: #3b3f47; /* Cor escura para links */
-            text-decoration: none;
-        }
-
-        .social-links a:hover {
-            text-decoration: underline;
-        }
-
-        /* Estilos responsivos */
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-                width: 90%;
-            }
-
-            h1 {
-                font-size: 26px;
-            }
+        .social-icons a:hover {
+            color: #6A4C9C; /* Roxo ao passar o mouse */
         }
     </style>
 </head>
 <body>
 
-<!-- Conteúdo principal -->
-<div class="container">
-    <h1>Entre em contato conosco</h1>
+    <!-- Conteúdo Principal -->
+    <div class="container">
+        <h2>Entre em Contato Conosco</h2>
+        <p>Se tiver alguma dúvida ou precisar de mais informações, não hesite em nos contatar pelas formas abaixo.</p>
 
-    <form action="mensagem.php" method="POST">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+        <div class="contact-info">
+            <h3>Informações de Contato</h3>
+            <p>Você pode nos contatar pelo e-mail: <a href="mailto:contato@cemfreelas.com.br">contato@cemfreelas.com.br</a></p>
+            <p>Ou pelo telefone: (11) 99999-9999</p>
+        </div>
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="mensagem">Mensagem:</label>
-        <textarea id="mensagem" name="mensagem" required></textarea>
-
-        <button type="submit">Enviar Mensagem</button>
-    </form>
-
-    <div class="contact-info">
-        <p>Você também pode nos encontrar em:</p>
-        <p>Email: contato@cemfreelas.com</p>
-        <p>Telefone: (11) 99999-9999</p>
+        <!-- Redes Sociais -->
+        <div class="social-icons">
+            <a href="https://www.facebook.com/cemfreelas" target="_blank" title="Facebook">
+                <i class="fab fa-facebook-f"></i> Facebook: @cemfreelas
+            </a>
+            <a href="https://www.instagram.com/cemfreelas" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i> Instagram: @cemfreelas
+            </a>
+            <a href="https://www.linkedin.com/company/cemfreelas" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i> LinkedIn: @cemfreelas
+            </a>
+            <a href="https://twitter.com/cemfreelas" target="_blank" title="Twitter">
+                <i class="fab fa-twitter"></i> Twitter: @cemfreelas
+            </a>
+            <a href="https://wa.me/5511999999999" target="_blank" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i> WhatsApp: +55 11 99999-9999
+            </a>
+        </div>
     </div>
 
-    <div class="social-links">
-        <p>Redes sociais:</p>
-        <ul>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Instagram</a></li>
-        </ul>
-    </div>
-</div>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('show');
+        }
+    </script>
 
-<script>
-    function toggleMenu() {
-        const navLinks = document.querySelector('.nav-links');
-        navLinks.classList.toggle('active');
-    }
-</script>
+<?php include 'footer.php'; ?>    
 
 </body>
-<?php include 'footer.php'?>
 </html>
